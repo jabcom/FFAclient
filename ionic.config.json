@@ -1,0 +1,7 @@
+{
+  "name": "FFAclient",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
