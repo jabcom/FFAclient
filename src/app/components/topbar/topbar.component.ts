@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TopbarComponent implements OnInit {
 
   constructor() { }
-
+  isOnline: boolean = true;
   ngOnInit() {}
 
 }

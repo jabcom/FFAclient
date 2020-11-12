@@ -1,7 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Topbar
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header>  
+  <ion-item > 
+  <ion-toolbar>  
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons>  
+  </ion-toolbar  >   
+  <ion-spinner *ngIf="isOnline == false" name="circles"></ion-spinner>
+  <ion-icon *ngIf="isOnline == false" name="wifi-outline"></ion-icon>
+  <ion-icon *ngIf="isOnline == true" name="wifi"></ion-icon>
+</ion-item>
+
+
+</ion-header>  
