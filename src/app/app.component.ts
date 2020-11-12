@@ -14,11 +14,12 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent { navigate: any; menu:MenuController;   alertController:AlertController;
+export class AppComponent { navigate: any; menu:MenuController;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,  
+    public alertController:AlertController
   ) {
     this.initializeApp();
     this.sideMenu();    
@@ -28,19 +29,13 @@ export class AppComponent { navigate: any; menu:MenuController;   alertControlle
   
   async showPrompt() {  
     const prompt = await this.alertController.create({ 
-    header: 'Courses', 
-    message: 'Enter the Course name', 
+    header: 'Change Name',   
     inputs: [ 
     { 
     name: 'title', 
     type: 'text', 
-    placeholder: 'Course name' 
-    }, 
-    { 
-    name: 'title', 
-    type: 'text', 
-    placeholder: 'Course name' 
-    }, 
+    placeholder: 'Enter new name' 
+    },      
     ], 
     buttons: [  
     { 
@@ -80,12 +75,7 @@ export class AppComponent { navigate: any; menu:MenuController;   alertControlle
   sideMenu(){
     if(this.isHost)
     {       
-      this.navigate =[
-        {
-          title : 'Change Name',
-          url : '/home',
-          icon : 'person-outline'
-        },   
+      this.navigate =[         
         {
         title : 'Scores',
           url : '/home',
@@ -124,12 +114,7 @@ export class AppComponent { navigate: any; menu:MenuController;   alertControlle
       ]
     }
     else{
-      this.navigate =[
-        {
-          title : 'Change Name',
-          url : '/home',
-          icon : 'person-outline'
-        },   
+      this.navigate =[     
         {
         title : 'Scores',
           url : '/home',

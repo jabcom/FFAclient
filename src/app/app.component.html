@@ -12,8 +12,11 @@
       </ion-item>  
     </ion-header>  
     <ion-content color="light">       
-      <ion-button (click)="showPrompt()">Basic Alert
-        </ion-button>
+      
+      <ion-item (click)="showPrompt()" [routerLink]="">
+          <ion-icon slot="start" name="person-outline"></ion-icon> Change Name          
+      </ion-item>
+      
       <ion-list *ngFor="let pages of navigate">  
         <ion-menu-toggle auto-hide="true">            
           <ion-item [routerLink]="pages.url" routerDirection="forward">  
