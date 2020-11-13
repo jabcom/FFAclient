@@ -15,7 +15,7 @@
 
 
 </ion-list>
-<ion-footer>
-<ion-button  (click)="ClosePopover();setName()"> Confirm</ion-button> 
+<ion-footer> 
+<ion-button *ngIf="validName == true" (click)="ClosePopover();setName()"> Confirm</ion-button>   
 <ion-button (click)="ClosePopover()"> Close</ion-button> 
 </ion-footer>

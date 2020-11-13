@@ -9,11 +9,12 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {AddWordPopComponent} from './popovers/add-word-pop/add-word-pop.component';
+import {CreateNamePopComponent} from './popovers/create-name-pop/create-name-pop.component'
 
 
 @NgModule({
-  declarations: [AppComponent, AddWordPopComponent],
-  entryComponents: [AddWordPopComponent],
+  declarations: [AppComponent, AddWordPopComponent,CreateNamePopComponent],
+  entryComponents: [AddWordPopComponent,CreateNamePopComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
