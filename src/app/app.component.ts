@@ -8,24 +8,27 @@ import { version } from 'process';
 import { MenuController } from '@ionic/angular';
 
 import { AlertController } from '@ionic/angular';
+import{ PlayerInfoService} from './player-info.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent { navigate: any; menu:MenuController;
+export class AppComponent { navigate: any; menu:MenuController; 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,  
-    public alertController:AlertController
+    public alertController:AlertController,
+    private playerInfo: PlayerInfoService
   ) {
     this.initializeApp();
     this.sideMenu();    
   }
   versionNumer: string = "V0.0.2";
   isHost: boolean = true;
+  playerName: string;
   
   async showPrompt() {  
     const prompt = await this.alertController.create({ 
@@ -40,8 +43,15 @@ export class AppComponent { navigate: any; menu:MenuController;
     buttons: [  
     { 
     text: 'Save', 
-    handler: data => { 
+    handler: data => { this.playerName = data.title
+      
     console.log('Save clicked'); 
+    this.playerName.replace(/ /g,'');
+
+    if(this.playerName != null || this.playerName != ""){
+      this.playerInfo.changeName(this.playerName);
+    }   
+    console.log(this.playerName); 
     } 
     }, 
     { 
@@ -54,18 +64,13 @@ export class AppComponent { navigate: any; menu:MenuController;
     }); 
     await prompt.present(); 
     } 
-   
-
-
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();      
+      this.splashScreen.hide(); 
     });
   }
-  // this is the actual menu and routes for items, they are called as 'pages' of 'navigate'
-
 
   changeHost(HostOrNot: boolean){
     this.isHost = HostOrNot;
