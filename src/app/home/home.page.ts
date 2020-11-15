@@ -4,6 +4,7 @@ import {Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -72,7 +73,7 @@ export class HomePage {
       if(this.inputName != null || this.inputName != ""){
         this.playerInfo.changeHost(true);
         this.playerInfo.changeName(this.inputName);
-        this.router.navigate(['/choose-catagory'])
+        this.router.navigate(['/choose-catagory']);
       }
     }
       else{

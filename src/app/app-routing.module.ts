@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'choose-catagory',
     loadChildren: () => import('./choose-catagory/choose-catagory.module').then( m => m.ChooseCatagoryPageModule)
   },
+  {
+    path: 'playing-game',
+    loadChildren: () => import('./playing-game/playing-game.module').then( m => m.PlayingGamePageModule)
+  },
 
   
 

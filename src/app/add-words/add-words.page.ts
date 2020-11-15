@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
 import{ TitleWordsService} from '../title-words.service';
 
 
