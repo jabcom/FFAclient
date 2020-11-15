@@ -1,26 +1,53 @@
-<app-topbar></app-topbar>
+<app-topbar [server]="server"></app-topbar>
 
 <ion-content>
-
-  <ion-card>
-    <ion-button *ngIf="isOnline == true" expand="block" size="large" (click)="presentPopover()"> 
-      <ion-icon slot="start" name="add"></ion-icon>
-        Create Game
+  <ion-card *ngIf="server.serverInfo.connected == true">
+    <ion-card-header>
+      <ion-button expand="block" size="large" (click)="showNewGame()" [disabled]="showNewGameMenu">
+        <ion-icon slot="start" name="add">
+        </ion-icon>
+          New Game
       </ion-button>
-  <ion-button *ngIf="isOnline == false" color="medium" expand="block" size="large" >   
-      Offline    
-</ion-button>
-</ion-card>
-
-<ion-card>
-  <ion-button *ngIf="isOnline == true" expand="block" size="large" >
-    <ion-icon slot="start" name="add"></ion-icon>
-      join Game
-</ion-button>
-<ion-button *ngIf="isOnline == false" color="medium" expand="block" size="large" >  
-      Offline 
-</ion-button>
+    </ion-card-header>
+    <ion-card-content *ngIf="showNewGameMenu == true">
+      <ion-item>
+        <ion-label  position="floating">Name</ion-label>
+        <ion-input [(ngModel)]="playerName" placeholder="Enter Name"></ion-input>
+      </ion-item>
+      <ion-button  (click)="createGame()" color="secondary" expand="block">Start</ion-button>
+    </ion-card-content>
   </ion-card>
-  
+
+  <ion-card *ngIf="server.serverInfo.connected == true">
+    <ion-card-header>
+      <ion-button expand="block" size="large" (click)="showJoinGame()" [disabled]="showJoinGameMenu">
+        <ion-icon slot="start" name="add">
+        </ion-icon>
+          Join Game
+      </ion-button>
+    </ion-card-header>
+    <ion-card-content *ngIf="showJoinGameMenu == true">
+      <ion-item>
+        <ion-label position="floating">Room Code</ion-label>
+        <ion-input [(ngModel)]="roomID" autocapitalize="on" maxlength="4" minlength="4" required="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input [(ngModel)]="playerName" placeholder="Enter Name"></ion-input>
+      </ion-item>
+      <ion-button color="secondary" expand="block">Join</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="server.serverInfo.connected == false">
+    <ion-card-header>
+      <ion-card-title>No Connection</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+        Can not connect to {{ server.url }}
+    </ion-card-content>
+  </ion-card>
+Server version: {{server.serverInfo.version}}
 
 </ion-content>

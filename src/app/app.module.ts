@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {AddWordPopComponent} from './popovers/add-word-pop/add-word-pop.component';
 
 
+
 @NgModule({
   declarations: [AppComponent, AddWordPopComponent],
   entryComponents: [AddWordPopComponent],

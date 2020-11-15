@@ -8,67 +8,72 @@ import { version } from 'process';
 import { MenuController } from '@ionic/angular';
 
 import { AlertController } from '@ionic/angular';
-import{ PlayerInfoService} from './player-info.service';
+import { PlayerInfoService} from './player-info.service';
+
+import { ServerService } from './server.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent { navigate: any; menu:MenuController; 
+export class AppComponent { navigate: any; menu:MenuController;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar,  
+    private statusBar: StatusBar,
     public alertController:AlertController,
-    private playerInfo: PlayerInfoService
+    private playerInfo: PlayerInfoService,
+    private server: ServerService
   ) {
     this.initializeApp();
-    this.sideMenu();    
+    this.sideMenu();
   }
   versionNumer: string = "V0.0.2";
   isHost: boolean = true;
   playerName: string;
-  
-  async showPrompt() {  
-    const prompt = await this.alertController.create({ 
-    header: 'Change Name',   
-    inputs: [ 
-    { 
-    name: 'title', 
-    type: 'text', 
-    placeholder: 'Enter new name' 
-    },      
-    ], 
-    buttons: [  
-    { 
-    text: 'Save', 
+  ngOnInit() {
+    this.server.getServerInfo();
+  }
+  async showPrompt() {
+    const prompt = await this.alertController.create({
+    header: 'Change Name',
+    inputs: [
+    {
+    name: 'title',
+    type: 'text',
+    placeholder: 'Enter new name'
+    },
+    ],
+    buttons: [
+    {
+    text: 'Save',
     handler: data => { this.playerName = data.title
-      
-    console.log('Save clicked'); 
+
+    console.log('Save clicked');
     this.playerName.replace(/ /g,'');
 
     if(this.playerName != null || this.playerName != ""){
       this.playerInfo.changeName(this.playerName);
-    }   
-    console.log(this.playerName); 
-    } 
-    }, 
-    { 
-    text: 'Cancel',  
-    handler: data => { 
-    console.log('Cancel clicked'); 
-    } 
-    } 
-    ] 
-    }); 
-    await prompt.present(); 
-    } 
+    }
+    console.log(this.playerName);
+    }
+    },
+    {
+    text: 'Cancel',
+    handler: data => {
+    console.log('Cancel clicked');
+    }
+    }
+    ]
+    });
+    await prompt.present();
+    }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide(); 
+      this.splashScreen.hide();
     });
   }
 
@@ -76,11 +81,11 @@ export class AppComponent { navigate: any; menu:MenuController;
     this.isHost = HostOrNot;
     this.sideMenu();
   }
- 
+
   sideMenu(){
     if(this.isHost)
-    {       
-      this.navigate =[         
+    {
+      this.navigate =[
         {
         title : 'Scores',
           url : '/home',
@@ -95,12 +100,12 @@ export class AppComponent { navigate: any; menu:MenuController;
           title : 'Kick Player',
           url : '/home',
           icon : 'person-outline'
-        }, 
+        },
         {
           title : 'Change Host',
           url : '/home',
           icon : 'people-outline'
-        },   
+        },
         {
         title : 'Reset Scores',
           url : '/home',
@@ -119,7 +124,7 @@ export class AppComponent { navigate: any; menu:MenuController;
       ]
     }
     else{
-      this.navigate =[     
+      this.navigate =[
         {
         title : 'Scores',
           url : '/home',

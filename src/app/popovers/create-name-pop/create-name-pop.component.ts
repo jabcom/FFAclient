@@ -8,26 +8,24 @@ import{ PlayerInfoService} from '../../player-info.service';
   styleUrls: ['./create-name-pop.component.scss'],
 })
 export class CreateNamePopComponent implements OnInit {
+  private inputName: string
 
-  constructor(private popover: PopoverController, 
+  constructor(private popover: PopoverController,
               private playerInfo: PlayerInfoService) { }
-  inputName: string;
+
   ClosePopover() {
     this.popover.dismiss();
   }
 
   onGetValue(event) {
-    this.inputName = (<HTMLInputElement>event.target).value; 
-}
+    this.inputName = (<HTMLInputElement>event.target).value;
+  }
 
-  setName(){   
+  setName(){
     this.inputName.replace(/ /g,'');
+    this.popover.dismiss();
+  }
 
-    if(this.inputName != null || this.inputName != ""){
-      this.playerInfo.changeName(this.inputName);
-    }    
+ngOnInit() {}
 
-    
-  }  ngOnInit() {}
-  
 }

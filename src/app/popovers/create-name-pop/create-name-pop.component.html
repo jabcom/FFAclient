@@ -1,7 +1,7 @@
 <ion-header >
   <ion-item class="ion-no-border">
     <ion-label class="ion-text-wrap">
-      What would you like to be called?
+      Enter your Name:
     </ion-label>
   </ion-item>
 
@@ -10,12 +10,12 @@
 <ion-list no-padding no-margin>
 <ion-item>
   <ion-label position="floating">Your Name</ion-label>
-  <ion-input type="text" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+  <ion-input type="text" #curentInput clearInput="true" value="" (input)="onGetValue($event)"></ion-input>
 </ion-item>
 
 
 </ion-list>
 <ion-footer>
-<ion-button  (click)="ClosePopover();setName()"> Confirm</ion-button> 
-<ion-button (click)="ClosePopover()"> Close</ion-button> 
+<ion-button  (click)="ClosePopover();setName()"> Confirm</ion-button>
+<ion-button (click)="ClosePopover()"> Close</ion-button>
 </ion-footer>
