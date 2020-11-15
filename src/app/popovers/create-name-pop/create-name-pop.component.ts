@@ -15,14 +15,15 @@ export class CreateNamePopComponent {
               private router: Router)  { }
   inputName: string;
   validName:boolean;
+  isHost:boolean;
+  askedForRoomCode:boolean;
   ClosePopover() {
     this.popover.dismiss();
   }
 
   onGetValue(event) {
-    this.inputName = (<HTMLInputElement>event.target).value; 
-    this.inputName.replace(/ /g,'');
-    if(this.inputName != null && this.inputName != " "){
+    this.inputName = (<HTMLInputElement>event.target).value.replace(/ /g,'');; 
+      if(this.inputName != null && this.inputName != ""){
       this.validName = true;
     }
       else{
@@ -30,13 +31,28 @@ export class CreateNamePopComponent {
       }
 }
 
-  setName(){   
-     if(this.inputName != null || this.inputName != ""){
-      this.playerInfo.changeName(this.inputName);
-      this.router.navigate(['/add-words'])
-    }    
-
+  setName(isHost:boolean){
     
-  }  ngOnInit() {}
+    if(this.isHost){
+  
+     if(this.inputName != null || this.inputName != ""){
+      this.playerInfo.changeHost(true);
+      this.playerInfo.changeName(this.inputName);
+      this.router.navigate(['/choose-catagory'])
+     }
+    }
+    else{
+      if(this.inputName != null || this.inputName != ""){
+        this.playerInfo.changeHost(false);
+        this.playerInfo.changeName(this.inputName); 
+        this.askedForRoomCode= true;  
+        //this.router.navigate(['/choose-catagory'])     
+      }     
+  }
+}
+
+  ngOnInit() {
+    this.isHost = this.playerInfo.getHost();
+  }
   
 }

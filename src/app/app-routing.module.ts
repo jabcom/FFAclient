@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'add-words',
     loadChildren: () => import('./add-words/add-words.module').then( m => m.AddWordsPageModule)
+  },  {
+    path: 'choose-catagory',
+    loadChildren: () => import('./choose-catagory/choose-catagory.module').then( m => m.ChooseCatagoryPageModule)
   },
+
   
 
 

@@ -1,12 +1,40 @@
 <app-topbar></app-topbar>
-
 <ion-content>
 
-  <ion-card>
-<ion-button expand="block" size="large" (click)="presentPopover()">
-  <ion-icon slot="start" name="add"></ion-icon>
-  Add Words
-</ion-button>
-</ion-card>
+<ion-card color="secondary" >
+  <ion-card-header>
+<ion-card-title class="ion-text-center">Pick 3 type of [Catagory]</ion-card-title>
+</ion-card-header>
 
-</ion-content>
+<ion-card>
+  <ion-card-content>  
+
+<ion-list no-padding no-margin>
+<ion-item>
+  <ion-label position="floating">Your Word</ion-label>
+  <ion-input type="text" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+</ion-item>
+
+<ion-item>
+  <ion-button  fill="clear" expand="square" (click)="addWord();curentInput.value = ''" > Add</ion-button>
+  <ion-label slot = "end" class="ion-text-right" > {{words.length}}/3 added</ion-label>
+</ion-item>
+
+
+
+<ion-item *ngIf="wordAlreadyAdded == true">
+  <ion-label  class="ion-text-center" color="danger" >Word already Added</ion-label>
+</ion-item>
+
+<ion-list *ngFor="let wordItems of words">  
+  <ion-item>  {{wordItems}} <ion-button  slot = "end" (click)="removeWord(wordItems)">
+    <ion-icon slot="icon-only" fill="clear" name="remove"></ion-icon>
+  </ion-button>
+  </ion-item> 
+
+</ion-list>
+
+
+
+
+
