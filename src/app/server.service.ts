@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import {Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,12 +11,6 @@ export class ServerService {
     this.connect();
   };
   //private socket: SocketIOClient.Socket;
-
-  roomUpdateObserver = new Observable((observer )=>  {
-    // observable execution
-    observer.next(this.roomInfo)
-
-  })
 
 
 
@@ -128,7 +121,11 @@ export class ServerService {
       } else {
         this.roomInfo = data;
       }
+
+      //Set player name
       this.playerName = this.roomInfo.playerName;
+
+      //Set in room
       if (this.roomInfo.id != "") {
         this.inRoom = true;
         if (this.playerName == this.roomInfo.host) {
@@ -137,7 +134,23 @@ export class ServerService {
       } else {
         this.inRoom = false;
       }
-      this.roomUpdateObserver;
+
+      //Set Waiting On Words
+      if (this.roomInfo.state == 1) {
+        let waitingCount : number = 0;
+        let waitingFor : string = "";
+        for (let i : number; i < this.roomInfo.players; i++) {
+          if (this.roomInfo.players[i].state == 1) {
+            waitingCount =+ 1;
+            waitingFor = this.roomInfo.players[i].name;
+          }
+        }
+        if (waitingCount > 1) {
+          this.roomInfo.waitingFor = waitingCount.toString() + " players";
+        } else {
+          this.roomInfo.waitingFor = waitingFor;
+        }
+      }
       console.log(this.roomInfo);
     });
     //showError
