@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PlayingGamePageRoutingModule } from './playing-game-routing.module';
 
 import { PlayingGamePage } from './playing-game.page';
+import { TopbarComponent } from '../components/topbar/topbar.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { PlayingGamePage } from './playing-game.page';
     IonicModule,
     PlayingGamePageRoutingModule
   ],
-  declarations: [PlayingGamePage]
+  entryComponents: [TopbarComponent],
+  declarations: [PlayingGamePage,TopbarComponent]
 })
 export class PlayingGamePageModule {}

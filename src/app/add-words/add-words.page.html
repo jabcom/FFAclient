@@ -25,7 +25,7 @@
 <ion-item *ngIf="wordAlreadyAdded == true">
   <ion-label  class="ion-text-center" color="danger" >Word already Added</ion-label>
 </ion-item>
-
+</ion-list>
 <ion-list *ngFor="let wordItems of words">  
   <ion-item>  {{wordItems}} <ion-button  slot = "end" (click)="removeWord(wordItems)">
     <ion-icon slot="icon-only" fill="clear" name="remove"></ion-icon>
@@ -33,6 +33,27 @@
   </ion-item> 
 
 </ion-list>
+  </ion-card-content>
+</ion-card>
+</ion-card>
+<ion-card color="secondary" >
+  <ion-card-header>
+  <ion-card-title class="ion-text-center"> 2 players ready</ion-card-title>
+  </ion-card-header>
+  <ion-list *ngFor="let player of playersJoinedArray"> 
+    <ion-item *ngIf="player.ready == false" color="light"> 
+      <ion-icon *ngIf="player.ready == true"  slot="start" name ="checkmark-outline"></ion-icon>
+      <ion-spinner *ngIf="player.ready == false" name="circles"></ion-spinner>      
+      <ion-title>{{player.name}}</ion-title>
+    </ion-item>
+    <ion-item *ngIf="player.ready == true" > 
+      <ion-icon *ngIf="player.ready == true"  slot="start" name ="checkmark-outline"></ion-icon>
+      <ion-spinner *ngIf="player.ready == false" name="circles"></ion-spinner>      
+      <ion-title>{{player.name}}</ion-title>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
 
 
 

@@ -9,6 +9,8 @@ import { Gesture, GestureController, IonButton, IonCard } from '@ionic/angular';
 export class PlayingGamePage implements AfterViewInit {  
 
   @ViewChild(IonButton,{read: ElementRef}) card: ElementRef;
+
+  
   longpressActive = false;
   constructor(private gestureCtrl: GestureController) {    
    

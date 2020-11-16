@@ -8,7 +8,16 @@ import{ TitleWordsService} from '../title-words.service';
   styleUrls: ['./add-words.page.scss'],
 })
 export class AddWordsPage implements OnInit {
-
+  playersJoinedArray = [
+    {name:'Jimmy',
+    ready:false},
+    {name:'fuzzyRick',
+    ready: true },
+    { name: 'ArseBlast',
+    ready:true,},
+    {name: 'Gregory Buttsnaps',
+    ready: false}];
+ 
   constructor(private titleWordService: TitleWordsService) { }
 
   words: string[] = [];

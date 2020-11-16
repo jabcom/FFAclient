@@ -24,7 +24,7 @@
 
   <ion-item >
       <ion-label color="primary" position="floating">Your Name</ion-label>
-      <ion-input type="text" maxlength="20" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+      <ion-input type="text" minlength="1" maxlength="20" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
   <ion-item *ngIf="isHost == true">
     <ion-button fill="clear" slot="start"  *ngIf="validName != true"><ion-text color="medium"> confirm</ion-text></ion-button>
     <ion-button *ngIf="validName == true" slot="start" fill="clear" (click)="setName()"> Confirm</ion-button>   
@@ -53,7 +53,7 @@
 
   <ion-item >
       <ion-label color="primary" position="floating">Your Name</ion-label>
-      <ion-input type="text" maxlength="20" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+      <ion-input type="text" minlength="1" maxlength="20" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
     </ion-item >
       <ion-item class="ion-no-border">
       <ion-label class="ion-text-center">
@@ -67,7 +67,7 @@
         </ion-item>
     <ion-item >
       <ion-label  color="primary" position="floating">Room Code</ion-label>   
-      <ion-input type="text" maxlength="4" #curentInput clearInput = "true" (input)="onGetRoomCode($event)"></ion-input>   
+      <ion-input class="ion-text-uppercase" type="text" minlength="4" maxlength="4" #curentInput clearInput = "true" (input)="onGetRoomCode($event)"></ion-input>   
     
     </ion-item>
     <ion-item >
