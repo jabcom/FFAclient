@@ -17,7 +17,7 @@ export class ChooseCatagoryPage {
   catInput:string;  
   catInputNoSpaces:string;
   currentCatagory:string = '...'; 
-  setCatagory:boolean = false;
+  setCatagory:boolean;
 
   /*
   onGetValue(event) {

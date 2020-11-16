@@ -3,7 +3,7 @@
 
 <ion-card color="secondary" >
   <ion-card-header>
-<ion-card-title class="ion-text-center">Pick 3 type of [Catagory]</ion-card-title>
+<ion-card-title class="ion-text-center">Pick 3 type of {{server.roomInfo.category}}</ion-card-title>
 </ion-card-header>
 
 <ion-card>
@@ -17,7 +17,7 @@
 
 <ion-item>
   <ion-button  fill="clear" expand="square" (click)="addWord();curentInput.value = ''" > Add</ion-button>
-  <ion-label slot = "end" class="ion-text-right" > {{words.length}}/3 added</ion-label>
+  <ion-label slot = "end" class="ion-text-right" > {{words.length}}/{{server.roomInfo.minWords}} added</ion-label>
 </ion-item>
 
 
@@ -38,16 +38,16 @@
 </ion-card>
 <ion-card color="secondary" >
   <ion-card-header>
-  <ion-card-title class="ion-text-center"> {{playersReady}}</ion-card-title>
+  <ion-card-title class="ion-text-center"> Waiting for {{server.roomInfo.waitingFor}} </ion-card-title>
   </ion-card-header>
-  <ion-list *ngFor="let player of currentroomInfo.players"> 
-    <ion-item color="light">     
-      <ion-spinner *ngIf="player.wordCount != wordCountNeeded" name="circles"></ion-spinner>      
+  <ion-list *ngFor="let player of server.roomInfo.players"> 
+    <ion-item *ngIf="player.wordCount != server.roomInfo.minWords" color="light">     
+      <ion-spinner  name="circles"></ion-spinner>      
       <ion-title>{{player.name}}</ion-title>
       <ion-icon  slot="end" name ="easel-outline"></ion-icon>
       <ion-text slot="end">{{player.score}} points</ion-text>
     </ion-item>
-    <ion-item *ngIf="player.wordCount == wordCountNeeded" > 
+    <ion-item *ngIf="player.wordCount == server.roomInfo.minWords" > 
       <ion-icon slot="start" name ="checkmark-outline"></ion-icon>     
       <ion-title>{{player.name}}</ion-title>
       <ion-icon  slot="end" name ="easel-outline"></ion-icon>

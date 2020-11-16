@@ -14,8 +14,8 @@
 <ion-card-title  *ngIf="server.isHost" class="ion-text-center">The current catagory is</ion-card-title>
 
 <ion-card-title *ngIf="server.isHost" class="ion-text-center"><ion-text color="primary">{{currentCatagory}}</ion-text> </ion-card-title> 
-<ion-card-title *ngIf="server.isHost == false && setCatagory" class="ion-text-center"><ion-text color="primary">{{server.roomInfo.category}}</ion-text> </ion-card-title> 
-<ion-card-title *ngIf="server.isHost == false && setCatagory == true" class="ion-text-center"><ion-text color="primary">...</ion-text> </ion-card-title> 
+<ion-card-title *ngIf="server.isHost == false" class="ion-text-center"><ion-text color="primary">{{server.roomInfo.category}}</ion-text> </ion-card-title> 
+<ion-card-title *ngIf="server.isHost == false && setCatagory == false" class="ion-text-center"><ion-text color="primary">...</ion-text> </ion-card-title> 
   
 </ion-card-header>
 

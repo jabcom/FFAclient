@@ -23,7 +23,8 @@ export class ServerService {
 
   private socket;
 
-  private url = 'https://ffaserver-egzle5ktia-nw.a.run.app';
+  private url = 'http://192.168.50.224:3000';
+  //private url = 'https://ffaserver-egzle5ktia-nw.a.run.app';
   //public url = "http://127.0.0.1:3000";
   public serverInfo: any = {
     name: "",

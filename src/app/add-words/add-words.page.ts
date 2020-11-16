@@ -13,10 +13,7 @@ export class AddWordsPage implements OnInit {
 
   words: string[] = [];
   wordsLowerCase: string[] = [];
-  inputWord:string;
-  currentroomInfo;
-  playersReady:number;
-  wordCountNeeded = 3;
+  inputWord:string; 
   inputWordLowerCase:string;
   wordAlreadyAdded: boolean
 
@@ -32,7 +29,8 @@ export class AddWordsPage implements OnInit {
       this.words.push(this.inputWord);
       this.wordsLowerCase.push(this.inputWordLowerCase);  
      // this.titleWordService.addWords(this.words);    
-      console.log(this.words);      
+      console.log(this.words);   
+      this.server.setWordList(this.words);   
     }
     else{
       this.wordAlreadyAdded = true;      
@@ -44,20 +42,15 @@ export class AddWordsPage implements OnInit {
       let lowerWordIndex= this.wordsLowerCase.indexOf(wordToRemove.toLowerCase());
     this.words.splice(wordIndex, 1); 
     this.wordsLowerCase.splice(lowerWordIndex,1);
+    this.server.setWordList(this.words);
     console.log(this.words);
     console.log(this.wordsLowerCase);
   }
 
   ngOnInit(){
    //this.words = this.titleWordService.getWords()
-   this.currentroomInfo = this.server.roomInfo;
-   console.log(this.currentroomInfo);   
-   this.currentroomInfo.players.forEach(element => {
-     if(element.wordCount == 3){
-       this.playersReady += 1;
-     }
-     
-   });
+       
+   
   }
 
 }
