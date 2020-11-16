@@ -11,6 +11,7 @@ import { AlertController } from '@ionic/angular';
 import { PlayerInfoService} from './player-info.service';
 
 import { ServerService } from './server.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -24,14 +25,19 @@ export class AppComponent { navigate: any; menu:MenuController;
     private statusBar: StatusBar,
     public alertController:AlertController,
     private playerInfo: PlayerInfoService,
-    private server: ServerService
+    private server: ServerService,
+    private router: Router
   ) {
     this.initializeApp();
   }
   versionNumer: string = "V0.0.2";
   playerName: string = "Dave";
   ngOnInit() {
-    this.server.getServerInfo();
+    this.server.getServerInfo();   
+      if(this.server.roomInfo.state == -1){
+        this.router.navigate(['/home'])        
+      }
+    
   }
   async showPrompt() {
     const prompt = await this.alertController.create({

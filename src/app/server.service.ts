@@ -63,9 +63,10 @@ export class ServerService {
 
   public setCategory(category: string) {
     this.socket.emit('setCategory', {category: category});
+    console.log(category)
   }
 
-  public setCategory(wordlist: string[]) {
+  public setWordList(wordList: string[]) {
     this.socket.emit('setWordList', {wordList: wordList});
   }
 
@@ -77,7 +78,7 @@ export class ServerService {
     this.socket.emit('changeHost', {newHost: name});
   }
 
-  public changeScore(name: string, score: interger) {
+  public changeScore(name: string, score: number) {
     this.socket.emit('changeScore', {playerName: name, newScore: score});
   }
 
@@ -90,6 +91,10 @@ export class ServerService {
   }
 
   public resetGame() {
+    this.socket.emit('newGame');
+  }
+  
+  public startGame() {
     this.socket.emit('startGame');
   }
 

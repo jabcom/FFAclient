@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServerService } from '../server.service';
 
 
@@ -8,49 +8,57 @@ import { ServerService } from '../server.service';
   templateUrl: './choose-catagory.page.html',
   styleUrls: ['./choose-catagory.page.scss'],
 })
-export class ChooseCatagoryPage implements OnInit {
+export class ChooseCatagoryPage {
 
-  constructor( private server : ServerService,)  { 
-    this.server.roomUpdateObserver.subscribe(      
-      val => { this.currentroomInfo = val},)                //next callback
-      if(this.currentroomInfo.host == this.currentroomInfo.playerName){
-        this.isHost = true;
-      }
-      else{
-        this.isHost = false;
-        } 
-      console.log(this.currentroomInfo) ;
+  constructor( private server : ServerService,)  {     
   }
 
-  isHost:boolean;
-  catInput:string;
-  currentroomInfo;
+  
+  catInput:string;  
   catInputNoSpaces:string;
-  currentCatagory:string = '...';
-  catagoryArray: string[] = ['monsters','fuzzy animals','teenage heart Throbs', 'national monuments'];
+  currentCatagory:string = '...'; 
+  setCatagory:boolean = false;
 
-  ngOnInit() { 
-    
-  }
-
+  /*
   onGetValue(event) {
-    this.catInput = (<HTMLInputElement>event.target).value;
+    //this.catInput = (<HTMLInputElement>event.target).value;
     this.catInputNoSpaces =this.catInput.replace(/ /g,'');
     if(this.catInputNoSpaces!= null && this.catInputNoSpaces!=""){ 
       this.currentCatagory = this.catInput.trim();
-      console.log(this.catInput);
+      this.server.setCategory(this.currentCatagory); 
+      console.log(this.currentCatagory);
     }
     else{
       this.currentCatagory = '...';
     }  
   }
+  */
+ 
+ onGetValue() {
+  this.catInput = (<HTMLInputElement>event.target).value;
+  this.catInputNoSpaces =this.catInput.replace(/ /g,'');
+  if(this.catInputNoSpaces!= null && this.catInputNoSpaces!=""){ 
+    this.currentCatagory = this.catInput.trim();    
+    this.server.setCategory(this.currentCatagory); 
+    this.setCatagory = true;
+    console.log(this.currentCatagory);
+  }
+  else{
+    this.currentCatagory = '...';
+    this.setCatagory = true;
+    this.server.setCategory(this.currentCatagory); 
+  }  
+}
   getRandomCatagory(){
-    this.currentCatagory = this.catagoryArray[Math.floor(Math.random()*this.catagoryArray.length)];
-    
+    this.currentCatagory = this.server.roomInfo.categorys[Math.floor
+      (Math.random()*this.server.roomInfo.categorys.length)]; 
+      this.setCatagory = true;
+      this.server.setCategory(this.currentCatagory);    
+      this.catInput = " ";
   }
 
   startGame(){
-    
+    this.server.startGame(); 
   }
 
 }
