@@ -1,17 +1,58 @@
 <app-topbar></app-topbar>
 
-
 <ion-content>
-<ion-item expand="full">
-   <ion-header>
+
+
+  
+<ion-card color="secondary" >
+  <ion-card-header>
+<ion-card-title class="ion-text-center"> DRAW!</ion-card-title>
+  </ion-card-header>
+  <ion-card>
+    
+      <ion-card-header  class="ion-text-center">
+    Take turns drawing. You can only draw a contious line. After everyone has drawn at least Once. 
+      Everyone vote who they think did not know the Title 
+    
+  </ion-card-header>
+</ion-card>
+</ion-card>
+
+<ion-card color="secondary" >
+  <ion-card-header>
+
+      <ion-title class="ion-text-center">
+        The category is {{server.roomInfo.category}}
+      </ion-title>
+ <ion-title class="ion-text-center">
+  The title is....
+</ion-title>
      <ion-title class="ion-text-center">
        {{message}}
      </ion-title>
-   </ion-header>
-</ion-item>
+  </ion-card-header>
 
-<ion-button color="secondary" expand="block"  shape="block">
-  Reveal
+<ion-card>
+<ion-button fill="clear"  expand="block" size="large"><ion-text color="secondary">
+  Hold to Reveal
+  </ion-text>
+
 </ion-button>
+</ion-card>
+</ion-card>
 
-</ion-content>
+<ion-card color="secondary" >
+  <ion-card-header>
+  <ion-card-title class="ion-text-center"> Guess who was the FAKE artist</ion-card-title>
+  </ion-card-header>
+  <ion-list *ngFor="let player of server.roomInfo.players"> 
+    <ion-item> 
+      <ion-icon  slot="start" name ="person-outline"></ion-icon>
+      <ion-button>{{player.name}}</ion-button>     
+    </ion-item>
+  </ion-list>
+</ion-card>
+
+
+
+
