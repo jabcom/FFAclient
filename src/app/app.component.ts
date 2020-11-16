@@ -33,11 +33,9 @@ export class AppComponent { navigate: any; menu:MenuController;
   versionNumer: string = "V0.0.2";
   playerName: string = "Dave";
   ngOnInit() {
-    this.server.getServerInfo();   
-      if(this.server.roomInfo.state == -1){
-        this.router.navigate(['/home'])        
-      }
-    
+    this.server.getServerInfo();
+    this.server.moveToRoom(this.server.roomInfo.state);
+
   }
   async showPrompt() {
     const prompt = await this.alertController.create({

@@ -13,16 +13,16 @@ export class ServerService {
   };
   //private socket: SocketIOClient.Socket;
 
-  roomUpdateObserver = new Observable((observer )=>  {    
+  roomUpdateObserver = new Observable((observer )=>  {
     // observable execution
     observer.next(this.roomInfo)
-   
-  }) 
+
+  })
 
 
 
   private socket;
-  
+
   private url = 'https://ffaserver-egzle5ktia-nw.a.run.app';
   //public url = "http://127.0.0.1:3000";
   public serverInfo: any = {
@@ -93,7 +93,7 @@ export class ServerService {
   public resetGame() {
     this.socket.emit('newGame');
   }
-  
+
   public startGame() {
     this.socket.emit('startGame');
   }
@@ -122,28 +122,11 @@ export class ServerService {
     //roomInfo
     this.socket.on('roomInfo', (data : any) => {
       //Check for game state change
-      if (this.roomInfo.state != data.state) {        
-        this.roomInfo = data; 
-        switch (data.state) {
-          case 0:
-            this.router.navigate(['/choose-catagory'])
-            break;
-          case 1:
-            this.router.navigate(['/add-words'])
-            //switch to adding words
-            break;
-          case 2:
-            //switch to playing game
-            break;
-          case 3:
-            //switch to artist guessed
-            break;
-          case 4:
-            //switch to word guessed
-            break;
-        }
+      if (this.roomInfo.state != data.state) {
+        this.roomInfo = data;
+        this.moveToRoom(data.state);
       } else {
-        this.roomInfo = data;        
+        this.roomInfo = data;
       }
       this.playerName = this.roomInfo.playerName;
       if (this.roomInfo.id != "") {
@@ -169,9 +152,34 @@ export class ServerService {
             //Do stuff
             break;
         }
-      }      
+      }
       console.log(data);
     });
+  }
+
+  public moveToRoom(state: number) {
+    console.log(state);
+    switch (state) {
+      case -1:
+        this.router.navigate(['/home'])
+        break;
+      case 0:
+        this.router.navigate(['/choose-catagory'])
+        break;
+      case 1:
+        this.router.navigate(['/add-words'])
+        //switch to adding words
+        break;
+      case 2:
+        //switch to playing game
+        break;
+      case 3:
+        //switch to artist guessed
+        break;
+      case 4:
+        //switch to word guessed
+        break;
+    }
   }
 
 }
