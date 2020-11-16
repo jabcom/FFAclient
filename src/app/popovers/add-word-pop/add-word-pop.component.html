@@ -1,0 +1,33 @@
+
+  <ion-header >
+    <ion-item class="ion-no-border">
+      <ion-label class="ion-text-wrap">
+        Add up to 3 Words that are type of [the Catagory]
+      </ion-label>
+    </ion-item>
+  
+  </ion-header>
+
+  <ion-list no-padding no-margin>
+  <ion-item>
+    <ion-label position="floating">Your Word</ion-label>
+    <ion-input type="text" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+  </ion-item>
+  <ion-item *ngIf="wordAlreadyAdded == true">
+    <ion-label  class="ion-text-center" color="danger" >Word already Added</ion-label>
+  </ion-item>
+
+  <ion-list *ngFor="let wordItems of words">  
+    <ion-item>  {{wordItems}} <ion-button  slot = "end" (click)="removeWord(wordItems)">
+      <ion-icon slot="icon-only" name="remove"></ion-icon>
+    </ion-button>
+    </ion-item> 
+ 
+</ion-list>
+<ion-footer>
+  <ion-item>
+    <ion-label class="ion-tesxt-center" > {{words.length}}/3 added</ion-label>
+  </ion-item>
+  <ion-button expand="square" (click)="addWord();curentInput.value = ''" > Add</ion-button>
+  <ion-button (click)="ClosePopover()"> close</ion-button>
+</ion-footer>

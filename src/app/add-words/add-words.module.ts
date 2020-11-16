@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
 import { TopbarComponent } from '../components/topbar/topbar.component';
+import { IonicModule } from '@ionic/angular';
 
+import { AddWordsPageRoutingModule } from './add-words-routing.module';
 
-import { HomePageRoutingModule } from './home-routing.module';
-
+import { AddWordsPage } from './add-words.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    AddWordsPageRoutingModule
   ],
   entryComponents: [TopbarComponent],
-  declarations: [HomePage, TopbarComponent]
+  declarations: [AddWordsPage,TopbarComponent]
 })
-export class HomePageModule {}
+export class AddWordsPageModule {}

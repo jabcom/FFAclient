@@ -1,7 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Topbar
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header>  
+ 
+  <ion-toolbar>  
+    <ion-buttons slot="start">  
+      <ion-menu-button color="dark"></ion-menu-button>   
+    </ion-buttons> Menu    
+    <ion-title slot="secondary">Room code: f6y4</ion-title>
+    <ion-spinner slot="end" *ngIf="isOnline == false" name="circles"></ion-spinner> 
+  </ion-toolbar> 
+
+
+
+
+</ion-header>  

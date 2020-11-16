@@ -1,0 +1,32 @@
+<ion-header >
+  <ion-item *ngIf="askedForRoomCode == false" class="ion-no-border">
+    <ion-label class="ion-text-wrap">
+      What would you like to be called?
+    </ion-label>
+  </ion-item>
+  <ion-item *ngIf="askedForRoomCode == true" class="ion-no-border">
+    <ion-label class="ion-text-wrap">
+      What is the Room Code?
+    </ion-label>
+  </ion-item>
+
+</ion-header>
+
+<ion-list no-padding no-margin>
+<ion-item *ngIf="askedForRoomCode != true">
+  <ion-label position="floating">Your Name</ion-label>
+  <ion-input type="text" maxlength="20" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+</ion-item>
+<ion-item *ngIf="askedForRoomCode == true">
+  <ion-label position="floating">Room Code</ion-label>
+  <ion-input type="text" maxlength="4" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+</ion-item>
+
+
+</ion-list>
+<ion-footer> 
+<ion-button fill="clear"  *ngIf="validName != true && askedForRoomCode != true"><ion-text color="medium"> confirm</ion-text></ion-button>
+<ion-button *ngIf="validName == true && askedForRoomCode != true" fill="clear" (click)="setName()"> Confirm</ion-button>   
+<ion-button fill="clear"  (click)="ClosePopover()"> Close</ion-button> 
+</ion-footer>
+  
