@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
+import {Router } from '@angular/router';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
-  constructor() {
+  constructor( public router: Router) {
     this.connect();
   };
   //private socket: SocketIOClient.Socket;
@@ -77,9 +80,10 @@ export class ServerService {
         this.roomInfo = data;
         switch (data.state) {
           case 0:
-            //switch to lobby
+            this.router.navigate(['/choose-catagory'])
             break;
           case 1:
+            this.router.navigate(['/add-words'])
             //switch to adding words
             break;
           case 2:
@@ -108,6 +112,17 @@ export class ServerService {
     });
     //showError
     this.socket.on('showError', (data : any) => {
+      if (data.type != null) {
+        switch(data.type){
+          case 0 :
+            //Popup
+            break;
+          case 1 :
+            //Room code invalid
+            //Do stuff
+            break;
+        }
+      }
       console.log(data);
     });
   }

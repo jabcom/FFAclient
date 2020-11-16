@@ -38,18 +38,20 @@
 </ion-card>
 <ion-card color="secondary" >
   <ion-card-header>
-  <ion-card-title class="ion-text-center"> 2 players ready</ion-card-title>
+  <ion-card-title class="ion-text-center"> {{playersReady}}</ion-card-title>
   </ion-card-header>
-  <ion-list *ngFor="let player of playersJoinedArray"> 
-    <ion-item *ngIf="player.ready == false" color="light"> 
-      <ion-icon *ngIf="player.ready == true"  slot="start" name ="checkmark-outline"></ion-icon>
-      <ion-spinner *ngIf="player.ready == false" name="circles"></ion-spinner>      
+  <ion-list *ngFor="let player of currentroomInfo.players"> 
+    <ion-item color="light">     
+      <ion-spinner *ngIf="player.wordCount != wordCountNeeded" name="circles"></ion-spinner>      
       <ion-title>{{player.name}}</ion-title>
+      <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+      <ion-text slot="end">{{player.score}} points</ion-text>
     </ion-item>
-    <ion-item *ngIf="player.ready == true" > 
-      <ion-icon *ngIf="player.ready == true"  slot="start" name ="checkmark-outline"></ion-icon>
-      <ion-spinner *ngIf="player.ready == false" name="circles"></ion-spinner>      
+    <ion-item *ngIf="player.wordCount == wordCountNeeded" > 
+      <ion-icon slot="start" name ="checkmark-outline"></ion-icon>     
       <ion-title>{{player.name}}</ion-title>
+      <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+      <ion-text slot="end">{{player.score}} points</ion-text>
     </ion-item>
   </ion-list>
 </ion-card>

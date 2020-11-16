@@ -8,8 +8,6 @@ import { ServerService } from '../server.service';
 })
 
 export class HomePage {
-  constructor(public popoverController : PopoverController, private server : ServerService) {
-  }
   createMenuOpen : boolean = false;
   validName: boolean = false;
   validRoom: boolean = false;
@@ -20,8 +18,10 @@ export class HomePage {
 
   constructor(private server : ServerService) {}
 
-  menuOpen(openOrNot:boolean){
+  menuOpen(openOrNot:boolean, createOrJoin: boolean){
+    //creat is true, join is false//
     this.nothingSelected = openOrNot;
+    this.createMenuOpen = createOrJoin;
   }
    
   onGetValue(event) {
@@ -49,11 +49,11 @@ export class HomePage {
   setName(isHost:boolean){
     if(this.createMenuOpen){
       if(this.inputName != null || this.inputName != ""){
-        server.createRoom(this.inputName);
+        this.server.createRoom(this.inputName);
       }
     } else {
         if(this.inputName != null || this.inputName != ""){
-          server.joinRoom(this.inputName, input.inputRoom);     
+          this.server.joinRoom(this.inputName, this.inputRoom);     
          }     
     } 
   }

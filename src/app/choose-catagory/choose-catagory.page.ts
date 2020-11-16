@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
-import{ PlayerInfoService} from '../player-info.service';
+import { ServerService } from '../server.service';
+
 
 @Component({
   selector: 'app-choose-catagory',
@@ -9,18 +9,19 @@ import{ PlayerInfoService} from '../player-info.service';
 })
 export class ChooseCatagoryPage implements OnInit {
 
-  constructor(private router: Router,
-    private playerInfo: PlayerInfoService,)  { }
+  constructor( private server : ServerService,)  { }
 
   isHost:boolean;
   catInput:string;
-  playersJoinedArray: string[] = ['Jimmy','fuzzyRick','ArseBlast', 'Swimming captin'];
+  currentroomInfo;
   catInputNoSpaces:string;
   currentCatagory:string = '...';
   catagoryArray: string[] = ['monsters','fuzzy animals','teenage heart Throbs', 'national monuments'];
 
   ngOnInit() {
-    this.isHost = this.playerInfo.getHost();
+    this.isHost = this.server.isHost;    
+    this.currentroomInfo = this.server.roomInfo;
+    console.log(this.currentroomInfo)  
   }
 
   onGetValue(event) {
@@ -40,7 +41,7 @@ export class ChooseCatagoryPage implements OnInit {
   }
 
   startGame(){
-    this.router.navigate(['/add-words'])
+    
   }
 
 }

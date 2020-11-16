@@ -14,37 +14,37 @@
     <ion-content color="light">
       <ion-list *ngIf="this.server.isHost == true">
         <ion-item [routerLink]="kickPlayer" routerDirection="forward">
-          <ion-icon [name]="person-outline" slot="start"></ion-icon>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
             Kick Player
         </ion-item>
         <ion-item [routerLink]="changeHost" routerDirection="forward">
-          <ion-icon [name]="person-outline" slot="start"></ion-icon>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
             Change Host
         </ion-item>
         <ion-item [routerLink]="editScores" routerDirection="forward">
-          <ion-icon [name]="easel-outline" slot="start"></ion-icon>
+          <ion-icon name="easel-outline" slot="start"></ion-icon>
             Edit Scores
         </ion-item>
       </ion-list>
 
       <ion-list *ngIf="this.server.inRoom">
         <ion-item [routerLink]="scores" routerDirection="forward">
-          <ion-icon [name]="easel-outline" slot="start"></ion-icon>
+          <ion-icon name="easel-outline" slot="start"></ion-icon>
             Scores
         </ion-item>
         <ion-item [routerLink]="rules" routerDirection="forward">
-          <ion-icon [name]="school-outline" slot="start"></ion-icon>
+          <ion-icon name="school-outline" slot="start"></ion-icon>
             Rules
         </ion-item>
-        <ion-item [routerLink]="leaveRoom" routerDirection="forward">
-          <ion-icon [name]="exit-outline" slot="start"></ion-icon>
+        <ion-item routerLink="leaveRoom" routerDirection="forward">
+          <ion-icon name="exit-outline" slot="start"></ion-icon>
             Leave Room
         </ion-item>
       </ion-list>
 
       <ion-list>
         <ion-item [routerLink]="exit" routerDirection="forward">
-          <ion-icon [name]="close-circle-outline" slot="start"></ion-icon>
+          <ion-icon name="close-circle-outline" slot="start"></ion-icon>
             Exit
         </ion-item>
       </ion-list>

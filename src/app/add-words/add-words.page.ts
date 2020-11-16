@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{ TitleWordsService} from '../title-words.service';
-
+import { ServerService } from '../server.service';
 
 @Component({
   selector: 'app-add-words',
@@ -8,21 +7,16 @@ import{ TitleWordsService} from '../title-words.service';
   styleUrls: ['./add-words.page.scss'],
 })
 export class AddWordsPage implements OnInit {
-  playersJoinedArray = [
-    {name:'Jimmy',
-    ready:false},
-    {name:'fuzzyRick',
-    ready: true },
-    { name: 'ArseBlast',
-    ready:true,},
-    {name: 'Gregory Buttsnaps',
-    ready: false}];
  
-  constructor(private titleWordService: TitleWordsService) { }
+ 
+  constructor( private server : ServerService) { }
 
   words: string[] = [];
   wordsLowerCase: string[] = [];
   inputWord:string;
+  currentroomInfo;
+  playersReady:number;
+  wordCountNeeded = 3;
   inputWordLowerCase:string;
   wordAlreadyAdded: boolean
 
@@ -37,7 +31,7 @@ export class AddWordsPage implements OnInit {
     if(!this.wordsLowerCase.includes(this.inputWordLowerCase)){
       this.words.push(this.inputWord);
       this.wordsLowerCase.push(this.inputWordLowerCase);  
-      this.titleWordService.addWords(this.words);    
+     // this.titleWordService.addWords(this.words);    
       console.log(this.words);      
     }
     else{
@@ -55,7 +49,15 @@ export class AddWordsPage implements OnInit {
   }
 
   ngOnInit(){
-    this.words = this.titleWordService.getWords()
+   //this.words = this.titleWordService.getWords()
+   this.currentroomInfo = this.server.roomInfo;
+   console.log(this.currentroomInfo);   
+   this.currentroomInfo.players.forEach(element => {
+     if(element.wordCount == 3){
+       this.playersReady += 1;
+     }
+     
+   });
   }
 
 }

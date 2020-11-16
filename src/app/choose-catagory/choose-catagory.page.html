@@ -37,12 +37,14 @@
 </ion-button>
 <ion-card color="secondary" >
   <ion-card-header>
-  <ion-card-title class="ion-text-center"> {{playersJoinedArray.length}} players connected</ion-card-title>
+  <ion-card-title class="ion-text-center"> {{currentroomInfo.players.length}} players connected</ion-card-title>
   </ion-card-header>
-  <ion-list *ngFor="let player of playersJoinedArray"> 
+  <ion-list *ngFor="let player of currentroomInfo.players"> 
     <ion-item> 
       <ion-icon  slot="start" name ="person-outline"></ion-icon>
-      <ion-title>{{player}}</ion-title>
+      <ion-title>{{player.name}}</ion-title>
+      <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+      <ion-text slot="end">{{player.score}} points</ion-text>
     </ion-item>
   </ion-list>
 </ion-card>
