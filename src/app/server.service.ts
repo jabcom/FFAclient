@@ -140,9 +140,9 @@ export class ServerService {
       if (this.roomInfo.state == 1) {
         let waitingCount : number = 0;
         let waitingFor : string = "";
-        for (let i : number; i < this.roomInfo.players; i++) {
+        for (let i : number = 0; i < this.roomInfo.players.length; i++) {
           if (this.roomInfo.players[i].state == 1) {
-            waitingCount =+ 1;
+            waitingCount += 1;
             waitingFor = this.roomInfo.players[i].name;
           }
         }
