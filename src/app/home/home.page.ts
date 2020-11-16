@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../server.service';
-
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 
-export class HomePage {
+export class HomePage implements OnInit{
   createMenuOpen : boolean = false;
   validName: boolean = false;
   validRoom: boolean = false;
@@ -17,6 +17,10 @@ export class HomePage {
   nothingSelected:boolean;
 
   constructor(private server : ServerService) {}
+ngOnInit(): void { 
+}
+
+
 
   menuOpen(openOrNot:boolean, createOrJoin: boolean){
     //creat is true, join is false//

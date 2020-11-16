@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import {Router } from '@angular/router';
-
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -12,7 +12,17 @@ export class ServerService {
     this.connect();
   };
   //private socket: SocketIOClient.Socket;
+
+  roomUpdateObserver = new Observable((observer )=>  {    
+    // observable execution
+    observer.next(this.roomInfo)
+   
+  }) 
+
+
+
   private socket;
+  
   private url = 'https://ffaserver-egzle5ktia-nw.a.run.app';
   //public url = "http://127.0.0.1:3000";
   public serverInfo: any = {
@@ -76,8 +86,8 @@ export class ServerService {
     //roomInfo
     this.socket.on('roomInfo', (data : any) => {
       //Check for game state change
-      if (this.roomInfo.state != data.state) {
-        this.roomInfo = data;
+      if (this.roomInfo.state != data.state) {        
+        this.roomInfo = data; 
         switch (data.state) {
           case 0:
             this.router.navigate(['/choose-catagory'])
@@ -97,7 +107,7 @@ export class ServerService {
             break;
         }
       } else {
-        this.roomInfo = data;
+        this.roomInfo = data;        
       }
       this.playerName = this.roomInfo.playerName;
       if (this.roomInfo.id != "") {
@@ -108,6 +118,7 @@ export class ServerService {
       } else {
         this.inRoom = false;
       }
+      this.roomUpdateObserver;
       console.log(this.roomInfo);
     });
     //showError
@@ -122,7 +133,7 @@ export class ServerService {
             //Do stuff
             break;
         }
-      }
+      }      
       console.log(data);
     });
   }
