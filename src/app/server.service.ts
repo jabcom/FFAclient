@@ -61,6 +61,37 @@ export class ServerService {
     this.socket.emit('joinRoom', {playerName: name, roomID: roomID});
   }
 
+  public setCategory(category: string) {
+    this.socket.emit('setCategory', {category: category});
+  }
+
+  public setCategory(wordlist: string[]) {
+    this.socket.emit('setWordList', {wordList: wordList});
+  }
+
+  public changeName(name: string) {
+    this.socket.emit('changeName', {newName: name});
+  }
+
+  public changeHost(name: string) {
+    this.socket.emit('changeHost', {newHost: name});
+  }
+
+  public changeScore(name: string, score: interger) {
+    this.socket.emit('changeScore', {playerName: name, newScore: score});
+  }
+
+  public kickPlayer(name: string) {
+    this.socket.emit('kickPlayer', {playerName: name});
+  }
+
+  public guessArtist(name: string) {
+    this.socket.emit('guessArtist', {playerName: name});
+  }
+
+  public resetGame() {
+    this.socket.emit('startGame');
+  }
 
   public connect() {
     console.log("connecting")
