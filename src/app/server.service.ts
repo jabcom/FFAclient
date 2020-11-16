@@ -21,8 +21,9 @@ export class ServerService {
   public roomInfo: any = {
     id: "",
     host: "",
-    state: "",
+    state: -1,
     category: "",
+    playerName: "",
     players: [],
     lastArtist: "",
     minWords: "",
@@ -32,6 +33,8 @@ export class ServerService {
     wordList: []
   }
   public inRoom: boolean = false;
+  public isHost: boolean = false;
+  public playerName: string = "";
 
   public getServerInfo() {
     this.socket.emit('serverInfo');
@@ -39,6 +42,7 @@ export class ServerService {
 
   public createRoom(name: string) {
     this.socket.emit('createRoom', {playerName: name});
+    this.playerName = name;
   }
 
 
@@ -55,13 +59,45 @@ export class ServerService {
       } else {
         this.serverInfo.connected = false;
       }
+      if (this.serverInfo.host == this.playerName) {
+        this.isHost == true;
+      } else {
+        this.isHost == false;
+      }
       console.log(this.serverInfo);
     });
+
     //roomInfo
     this.socket.on('roomInfo', (data : any) => {
-      this.roomInfo = data;
+      //Check for game state change
+      if (this.roomInfo.state != data.state) {
+        this.roomInfo = data;
+        switch (data.state) {
+          case 0:
+            //switch to lobby
+            break;
+          case 1:
+            //switch to adding words
+            break;
+          case 2:
+            //switch to playing game
+            break;
+          case 3:
+            //switch to artist guessed
+            break;
+          case 4:
+            //switch to word guessed
+            break;
+        }
+      } else {
+        this.roomInfo = data;
+      }
+      this.playerName = this.roomInfo.playerName;
       if (this.roomInfo.id != "") {
         this.inRoom = true;
+        if (this.playerName == this.roomInfo.host) {
+          this.isHost = true;
+        }
       } else {
         this.inRoom = false;
       }
