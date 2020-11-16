@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { io } from 'socket.io-client';
 import {Router } from '@angular/router';
 
@@ -10,9 +10,11 @@ export class ServerService {
   constructor( public router: Router) {
     this.connect();
   };
-  //private socket: SocketIOClient.Socket;
 
-
+  warningMessage = new EventEmitter<String>();
+  getWarningMessageEmitter(){
+    return this.warningMessage;
+  }
 
   private socket;
 
@@ -154,6 +156,7 @@ export class ServerService {
       }
       console.log(this.roomInfo);
     });
+
     //showError
     this.socket.on('showError', (data : any) => {
       if (data.type != null) {
@@ -167,6 +170,7 @@ export class ServerService {
             break;
         }
       }
+      this.warningMessage.emit(data.message);
       console.log(data);
     });
   }
