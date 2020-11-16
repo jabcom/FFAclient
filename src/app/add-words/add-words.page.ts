@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import { AddWordPopComponent } from '../popovers/add-word-pop/add-word-pop.component';
+import{ TitleWordsService} from '../title-words.service';
 
 
 @Component({
@@ -8,30 +7,57 @@ import { AddWordPopComponent } from '../popovers/add-word-pop/add-word-pop.compo
   templateUrl: './add-words.page.html',
   styleUrls: ['./add-words.page.scss'],
 })
-export class AddWordsPage {
-
-  constructor(private popoverController: PopoverController) { }
+export class AddWordsPage implements OnInit {
+  playersJoinedArray = [
+    {name:'Jimmy',
+    ready:false},
+    {name:'fuzzyRick',
+    ready: true },
+    { name: 'ArseBlast',
+    ready:true,},
+    {name: 'Gregory Buttsnaps',
+    ready: false}];
+ 
+  constructor(private titleWordService: TitleWordsService) { }
 
   words: string[] = [];
   wordsLowerCase: string[] = [];
+  inputWord:string;
+  inputWordLowerCase:string;
+  wordAlreadyAdded: boolean
 
-  async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component:  AddWordPopComponent,
-      cssClass: 'my-custom-class',
-      event: ev,
-      translucent: true,       
-                 
+  onGetValue(event) {
+    this.inputWord = (<HTMLInputElement>event.target).value.replace(/ /g,'');;  
+    this.wordAlreadyAdded = false;    
+}
+  addWord(){
+    if(this.inputWord!= null && this.inputWord!="" && this.words.length < 3){
+    this.inputWordLowerCase = this.inputWord.toLowerCase();
+    this.inputWordLowerCase = this.inputWordLowerCase.replace(/ /g,'');
+    if(!this.wordsLowerCase.includes(this.inputWordLowerCase)){
+      this.words.push(this.inputWord);
+      this.wordsLowerCase.push(this.inputWordLowerCase);  
+      this.titleWordService.addWords(this.words);    
+      console.log(this.words);      
     }
-    );    
-   
-    return await popover.present();
+    else{
+      this.wordAlreadyAdded = true;      
+      }    
+    }
   }
-
-  checkWords(){
-    
+  removeWord(wordToRemove:string){
+      let wordIndex = this.words.indexOf(wordToRemove)
+      let lowerWordIndex= this.wordsLowerCase.indexOf(wordToRemove.toLowerCase());
+    this.words.splice(wordIndex, 1); 
+    this.wordsLowerCase.splice(lowerWordIndex,1);
     console.log(this.words);
+    console.log(this.wordsLowerCase);
   }
 
+  ngOnInit(){
+    this.words = this.titleWordService.getWords()
+  }
 
 }
+
+

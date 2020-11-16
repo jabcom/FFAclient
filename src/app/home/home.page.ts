@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import { CreateNamePopComponent } from '../popovers/create-name-pop/create-name-pop.component';
 import { ServerService } from '../server.service';
 
 @Component({
@@ -12,34 +10,51 @@ import { ServerService } from '../server.service';
 export class HomePage {
   constructor(public popoverController : PopoverController, private server : ServerService) {
   }
+  createMenuOpen : boolean = false;
+  validName: boolean = false;
+  validRoom: boolean = false;
+  inputName:string;
+  wrongCode:boolean;
+  inputRoom:string;
+  nothingSelected:boolean;
 
-  playerName : string = "";
-  roomID : string = "";
-  private showNewGameMenu : boolean = false;
-  private showJoinGameMenu : boolean = false;
+  constructor(private server : ServerService) {}
 
-  showNewGame() {
-    this.showNewGameMenu = true;
-    this.showJoinGameMenu = false;
+  menuOpen(openOrNot:boolean){
+    this.nothingSelected = openOrNot;
   }
-
-  showJoinGame() {
-    this.showNewGameMenu = false;
-    this.showJoinGameMenu = true;
-  }
-
-  createGame() {
-    if (this.playerName != "") {
-      this.server.createRoom(this.playerName);
-    } else {
-      console.log("playerName not set")
+   
+  onGetValue(event) {
+    this.inputName = (<HTMLInputElement>event.target).value.replace(/ /g,'');; 
+    
+      if(this.inputName != null && this.inputName != ""){
+      this.validName = true;
     }
+      else{
+        this.validName=false;
+      }
   }
-  joinGame() {
-    if ((this.playerName != "") || (this.roomID != "")) {
-      this.server.joinRoom(this.playerName, this.roomID);
+
+
+    onGetRoomCode(event){     
+      this.inputRoom = (<HTMLInputElement>event.target).value.toUpperCase(); 
+      if(this.inputRoom.length == 4){
+          this.validRoom = true;
+        } else {
+          this.validRoom = false;
+        }
+      }
+
+    
+  setName(isHost:boolean){
+    if(this.createMenuOpen){
+      if(this.inputName != null || this.inputName != ""){
+        server.createRoom(this.inputName);
+      }
     } else {
-      console.log("playerName or roomID not set");
-    }
+        if(this.inputName != null || this.inputName != ""){
+          server.joinRoom(this.inputName, input.inputRoom);     
+         }     
+    } 
   }
 }

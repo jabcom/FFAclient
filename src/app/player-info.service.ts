@@ -7,6 +7,16 @@ export class PlayerInfoService {
 
   constructor() { }
   playerName:string;
+  isHost:boolean;
+
+
+  getHost():boolean{
+    return this.isHost;
+  }
+
+  changeHost(hostOrNot:boolean){
+    this.isHost = hostOrNot;
+  }
 
   changeName(newName:string){
     this.playerName = newName;

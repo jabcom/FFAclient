@@ -1,0 +1,50 @@
+<app-topbar></app-topbar>
+
+<ion-content>
+  <ion-card color="secondary" >
+    <ion-card-header>
+  <ion-card-title class="ion-text-center">Room Code = f6y4</ion-card-title>
+  </ion-card-header>
+  </ion-card>
+
+<ion-card color="secondary" >
+  <ion-card-header>
+<ion-card-title  *ngIf="isHost" class="ion-text-center">Pick a Catagory</ion-card-title>
+<ion-card-title  *ngIf="!isHost" class="ion-text-center">The Host is picking a Catagory</ion-card-title>
+</ion-card-header>
+
+
+<ion-card  >
+  <ion-card-header>
+<ion-card-title  class="ion-text-center">The current catagory is</ion-card-title>
+
+<ion-card-title class="ion-text-center"><ion-text color="primary">{{currentCatagory}}</ion-text> </ion-card-title> 
+  </ion-card-header>
+
+  <ion-item *ngIf="isHost" expand="fill">
+    <ion-icon  slot="start" name ="person-outline"></ion-icon>
+    <ion-label position="floating">type your own</ion-label>
+    <ion-input type="text" maxlength="20" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+  </ion-item>
+
+
+<ion-button *ngIf="isHost" (click)="getRandomCatagory();curentInput.value = ''" fill="clear"  shape="block">
+  Random
+</ion-button>
+</ion-card>
+</ion-card>
+<ion-button *ngIf="currentCatagory!='...'&& isHost" fill="clear"  shape="block" (click)="startGame()"> Start Game
+</ion-button>
+<ion-card color="secondary" >
+  <ion-card-header>
+  <ion-card-title class="ion-text-center"> {{playersJoinedArray.length}} players connected</ion-card-title>
+  </ion-card-header>
+  <ion-list *ngFor="let player of playersJoinedArray"> 
+    <ion-item> 
+      <ion-icon  slot="start" name ="person-outline"></ion-icon>
+      <ion-title>{{player}}</ion-title>
+    </ion-item>
+  </ion-list>
+</ion-card>
+
+
