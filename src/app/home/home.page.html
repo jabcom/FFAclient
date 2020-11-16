@@ -35,7 +35,7 @@
         <ion-label position="floating">Name</ion-label>
         <ion-input [(ngModel)]="playerName" placeholder="Enter Name"></ion-input>
       </ion-item>
-      <ion-button color="secondary" expand="block">Join</ion-button>
+      <ion-button (click)="joinGame()" color="secondary" expand="block">Join</ion-button>
     </ion-card-content>
   </ion-card>
 

@@ -42,7 +42,10 @@ export class ServerService {
 
   public createRoom(name: string) {
     this.socket.emit('createRoom', {playerName: name});
-    this.playerName = name;
+  }
+
+  public joinRoom(name: string, roomID : string) {
+    this.socket.emit('joinRoom', {playerName: name, roomID: roomID});
   }
 
 

@@ -29,6 +29,17 @@ export class HomePage {
   }
 
   createGame() {
-    this.server.createRoom(this.playerName);
+    if (this.playerName != "") {
+      this.server.createRoom(this.playerName);
+    } else {
+      console.log("playerName not set")
+    }
+  }
+  joinGame() {
+    if ((this.playerName != "") || (this.roomID != "")) {
+      this.server.joinRoom(this.playerName, this.roomID);
+    } else {
+      console.log("playerName or roomID not set");
+    }
   }
 }
