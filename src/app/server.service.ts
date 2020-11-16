@@ -185,6 +185,7 @@ export class ServerService {
         //switch to adding words
         break;
       case 2:
+        this.router.navigate(['/playing-games'])
         //switch to playing game
         break;
       case 3:

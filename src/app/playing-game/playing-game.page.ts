@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Query } from '@angular/core';
 import { Gesture, GestureController, IonButton, IonCard } from '@ionic/angular';
+import { ServerService } from '../server.service';
+
 
 @Component({
   selector: 'app-playing-game',
@@ -12,13 +14,12 @@ export class PlayingGamePage implements AfterViewInit {
 
   
   longpressActive = false;
-  constructor(private gestureCtrl: GestureController) {    
+  constructor(
+    private gestureCtrl: GestureController,
+    private server : ServerService) {    
    
-  }
-  isFakeArtist: boolean;
+  } 
   message: string = '?';
-  currentTitle: string = 'Squirrel';
-  currentCat: string = 'Fuzzy Animals';
   fakeartistMEssage = 'You are the fake artist'
   
   ngOnInit() {
@@ -35,8 +36,8 @@ export class PlayingGamePage implements AfterViewInit {
         onStart: ev => {
           console.log('press')
           this.longpressActive = true;
-          if(this.isFakeArtist){
-            this.message = 'The Title is ' + this.currentTitle;
+          if(this.server.roomInfo.artist == this.server.roomInfo.playerName){
+            this.message = 'The Title is ' + this.server.roomInfo.word;
           }
           else{
             this.message = this.fakeartistMEssage;

@@ -34,7 +34,7 @@ export class AppComponent { navigate: any; menu:MenuController;
   playerName: string = "Dave";
   ngOnInit() {
     this.server.getServerInfo();
-    this.server.moveToRoom(this.server.roomInfo.state);
+    //this.server.moveToRoom(this.server.roomInfo.state);
 
   }
   async showPrompt() {
