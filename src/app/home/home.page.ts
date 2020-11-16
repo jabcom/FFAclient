@@ -1,39 +1,27 @@
 import { Component } from '@angular/core';
-import{ PlayerInfoService} from '../player-info.service';
-import {Router } from '@angular/router';
-
-
-
+import { ServerService } from '../server.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
 
-  isOnline: boolean = true;
-  isHost: boolean;
-  validName: boolean;
-  debugRoomCode: string = "q2w3";
-  validRoom: boolean;
+export class HomePage {
+  constructor(public popoverController : PopoverController, private server : ServerService) {
+  }
+  createMenuOpen : boolean = false;
+  validName: boolean = false;
+  validRoom: boolean = false;
   inputName:string;
   wrongCode:boolean;
   inputRoom:string;
   nothingSelected:boolean;
 
-  constructor(
-    public playerInfo: PlayerInfoService,
-    public router: Router) {}
+  constructor(private server : ServerService) {}
 
-
-  setToHost(hostOrNot:boolean){
-    this.isHost = hostOrNot;   
-    this.playerInfo.changeHost(hostOrNot);
-  }
-
-  menuOpen(openOrNOt:boolean){
-    this.nothingSelected = openOrNOt;
+  menuOpen(openOrNot:boolean){
+    this.nothingSelected = openOrNot;
   }
    
   onGetValue(event) {
@@ -49,42 +37,24 @@ export class HomePage {
 
 
     onGetRoomCode(event){     
-      this.inputRoom = (<HTMLInputElement>event.target).value.toLowerCase(); 
+      this.inputRoom = (<HTMLInputElement>event.target).value.toUpperCase(); 
       if(this.inputRoom.length == 4){
-        if(this.inputRoom == this.debugRoomCode){  
           this.validRoom = true;
-        }    
-        else{
-          this.validRoom =false;
-          this.wrongCode = true;
+        } else {
+          this.validRoom = false;
         }
       }
-      else{
-        this.wrongCode = false;
-      }
-    
-  }
 
     
   setName(isHost:boolean){
-    
-    if(this.isHost){
-
+    if(this.createMenuOpen){
       if(this.inputName != null || this.inputName != ""){
-        this.playerInfo.changeHost(true);
-        this.playerInfo.changeName(this.inputName);
-        this.router.navigate(['/choose-catagory']);
+        server.createRoom(this.inputName);
       }
-    }
-      else{
+    } else {
         if(this.inputName != null || this.inputName != ""){
-          this.playerInfo.changeHost(false);
-          this.playerInfo.changeName(this.inputName);     
-          this.router.navigate(['/choose-catagory'])     
-            }     
-          } 
+          server.joinRoom(this.inputName, input.inputRoom);     
+         }     
+    } 
   }
-
-
-
 }

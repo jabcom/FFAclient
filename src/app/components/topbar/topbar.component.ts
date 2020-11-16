@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerService } from '../../server.service';
 
 @Component({
   selector: 'app-topbar',
@@ -6,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit {
-
-  constructor() { }
+  constructor(private server : ServerService) { }
   isOnline: boolean = true;
   ngOnInit() {}
 

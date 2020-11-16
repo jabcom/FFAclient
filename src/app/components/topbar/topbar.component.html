@@ -1,14 +1,27 @@
-<ion-header>  
- 
-  <ion-toolbar>  
-    <ion-buttons slot="start">  
-      <ion-menu-button color="dark"></ion-menu-button>   
-    </ion-buttons> Menu    
-    <ion-title slot="secondary">Room code: f6y4</ion-title>
-    <ion-spinner slot="end" *ngIf="isOnline == false" name="circles"></ion-spinner> 
-  </ion-toolbar> 
+<ion-header>
+  <ion-item>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons> Menu
+    <ion-title slot="secondary">
+      <ion-item *ngIf="server.inRoom == true">
+        <ion-text>
+          Room ID 
+        </ion-text>
+        <ion-text class="roomID" >
+          {{ server.roomInfo.id}}
+          </ion-text>
+        </ion-item>
+      <ion-item *ngIf="server.inRoom == false"></ion-item>
+    </ion-title>
+  </ion-toolbar>
+  <ion-spinner *ngIf="server.serverInfo.connected == false" name="circles"></ion-spinner>
+  <ion-icon *ngIf="server.serverInfo.connected == true" name="wifi"></ion-icon>
+  <ion-text *ngIf="server.serverInfo.connected == true">
+    {{ server.serverInfo.name }}
+    </ion-text>
+</ion-item>
 
 
-
-
-</ion-header>  
+</ion-header>
