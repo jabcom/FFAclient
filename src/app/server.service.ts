@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { io } from 'socket.io-client';
 import {Router } from '@angular/router';
 
@@ -10,9 +10,11 @@ export class ServerService {
   constructor( public router: Router) {
     this.connect();
   };
-  //private socket: SocketIOClient.Socket;
 
-
+  warningMessage = new EventEmitter<String>();
+  getWarningMessageEmitter(){
+    return this.warningMessage;
+  }
 
   private socket;
 
@@ -84,12 +86,24 @@ export class ServerService {
     this.socket.emit('guessArtist', {playerName: name});
   }
 
-  public resetGame() {
-    this.socket.emit('newGame');
+  public resetGameWithScores()  {
+    this.socket.emit('newGame', {keepScores: true});
+  }
+
+  public resetGameWithoutScores() {
+    this.socket.emit('newGame', {keepScores: false});
   }
 
   public startGame() {
     this.socket.emit('startGame');
+  }
+
+  public noMajority() {
+    this.socket.emit('moMajority');
+  }
+
+  public guessWord(wasCorrect: boolean) {
+    this.socket.emit('guessWord', {wasCorrect: wasCorrect});
   }
 
   public connect() {
@@ -110,6 +124,7 @@ export class ServerService {
       } else {
         this.isHost == false;
       }
+      this.serverInfo.url = this.url;
       console.log(this.serverInfo);
     });
 
@@ -154,6 +169,7 @@ export class ServerService {
       }
       console.log(this.roomInfo);
     });
+
     //showError
     this.socket.on('showError', (data : any) => {
       if (data.type != null) {
@@ -167,6 +183,7 @@ export class ServerService {
             break;
         }
       }
+      this.warningMessage.emit(data.message);
       console.log(data);
     });
   }

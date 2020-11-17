@@ -9,17 +9,17 @@ import { ServerService } from './server.service';
 import { fancyAnimation } from './animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { ServerInfoComponent } from './popovers/server-info/server-info.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, ServerInfoComponent],
+  entryComponents: [ServerInfoComponent],
   imports: [BrowserModule, IonicModule.forRoot({animated:true}), AppRoutingModule],
   providers: [
     StatusBar,
-    SplashScreen,    
-    ServerService,    
+    SplashScreen,
+    ServerService,
   ],
   bootstrap: [AppComponent]
 })
