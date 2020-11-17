@@ -43,12 +43,12 @@
   </ion-card-header>
 
   <ion-card>
-  <ion-button *ngIf="server.isHost" fill="clear" expand="block" size="large"><ion-text color="secondary">
+  <ion-button (click)="server.guessWord(true)" *ngIf="server.isHost" fill="clear" expand="block" size="large"><ion-text color="secondary">
     Yes
     </ion-text>
   </ion-button >
   <div></div>
-  <ion-button *ngIf="server.isHost"  fill="clear"  expand="block" size="large"><ion-text color="secondary">
+  <ion-button (click)="server.guessWord(false)" *ngIf="server.isHost"  fill="clear"  expand="block" size="large"><ion-text color="secondary">
     No
     </ion-text>
   </ion-button>

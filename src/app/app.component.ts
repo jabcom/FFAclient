@@ -39,7 +39,7 @@ export class AppComponent { navigate: any; menu:MenuController;
   ngOnInit() {
     this.server.getServerInfo();
     this.emitSubscription = this.server.getWarningMessageEmitter().subscribe(item => this.showWarning(item));
-    //this.server.moveToRoom(this.server.roomInfo.state);
+    this.server.moveToRoom(this.server.roomInfo.state);
 
   }
   ngOnDestroy() {

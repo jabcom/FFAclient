@@ -46,7 +46,7 @@
   <ion-card-title class="ion-text-center"> Guess who was the FAKE artist</ion-card-title>
   </ion-card-header>
   <ion-card>
-  <ion-button fill="white"  expand="block" size="large"><ion-text color="secondary">
+  <ion-button (click)="server.noMajority()" fill="white"  expand="block" size="large"><ion-text color="secondary">
     No majority
     </ion-text>
   
@@ -54,9 +54,9 @@
 </ion-card>
 
   <ion-list *ngFor="let player of server.roomInfo.players"> 
-    <ion-item button (click)="showPrompt(player)"> 
+    <ion-item button (click)="showPrompt(player.name)"> 
       <ion-icon  slot="start" name ="person-outline"></ion-icon>
-      {{player}}    
+      {{player.name}}    
     </ion-item>
   </ion-list>
 </ion-card>

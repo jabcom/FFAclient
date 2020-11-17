@@ -12,8 +12,8 @@ export class ScorboardPage implements OnInit {
 
   scorenumbers:number[] = [1]
   topScore:number;
-  topPLayers;
-  scoremessage:string;
+  topPLayers: any = [];
+  scoremessage:string = "";
 
   ngOnInit() {
 
@@ -23,20 +23,36 @@ export class ScorboardPage implements OnInit {
 
    this.topScore = Math.max.apply(null,this.scorenumbers);     
 
+console.log(this.topScore);
+
+   var i;
+   for (i = 0; i < this.server.roomInfo.players.length; i++) {
+    if(this.server.roomInfo.players[i].score == this.topScore){
+      this.topPLayers.push({
+        name: this.server.roomInfo.players[i].name,
+        score: this.server.roomInfo.players[i].score
+      });
+      console.log(this.topPLayers);
+        //this.topPLayers[this.topPLayers.length-1].name = this.server.roomInfo.players[i].name;
+        //this.topPLayers[this.topPLayers.length-1].score = this.server.roomInfo.players[i].score;
+   }
+    /*
    this.server.roomInfo.players.forEach(player => {
     if(player.score == this.topScore){
-      this.topPLayers.push(player);
+      this.topPLayers.push(player.name, player.score);
       }
-    })
+    }
+    )
+  */}
  
-    if(this.topPLayers.lengh > 1 ){
+    if(this.topPLayers.length > 1 ){
       this.topPLayers.forEach(player => {
-        this.scoremessage += player.name; +",";
+        this.scoremessage += player.name +", ";
       });
       this.scoremessage += ' are winning with ' + this.topScore + ' points';
     }
     else{
-      this.scoremessage +=  this.topPLayers[0] + ' is winning with ' + this.topScore + ' points';
+      this.scoremessage +=  this.topPLayers[0].name + ' is winning with ' + this.topScore + ' points';
     }
     
 

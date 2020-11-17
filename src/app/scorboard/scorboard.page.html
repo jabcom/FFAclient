@@ -14,12 +14,12 @@
 </ion-card-header>
 </ion-card>
 <ion-card >
-  <ion-button *ngIf="server.isHost" fill="clear" expand="block" size="large"><ion-text color="secondary">
+  <ion-button (click)="server.resetGameWithScores()" *ngIf="server.isHost" fill="clear" expand="block" size="large"><ion-text color="secondary">
     New Round
     </ion-text>
   </ion-button>
   <div></div>
-  <ion-button *ngIf="server.isHost" fill="clear"  expand="block" size="large"><ion-text color="secondary">
+  <ion-button (click)="server.resetGameWithoutScores()"*ngIf="server.isHost" fill="clear"  expand="block" size="large"><ion-text color="secondary">
     New Game
     </ion-text>
   </ion-button>

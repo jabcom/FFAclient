@@ -32,7 +32,7 @@ export class GuessTItlePage implements AfterViewInit {
         threshold: 0,
         onStart: ev => {
           console.log('press');         
-          if(this.server.roomInfo.artist == this.server.roomInfo.playerName){
+          if(this.server.roomInfo.artist != this.server.roomInfo.playerName){
             this.message = 'The Title is ' + this.server.roomInfo.word;
           }
           else{
