@@ -86,12 +86,24 @@ export class ServerService {
     this.socket.emit('guessArtist', {playerName: name});
   }
 
-  public resetGame() {
-    this.socket.emit('newGame');
+  public resetGameWithScores()  {
+    this.socket.emit('newGame', {keepScores: true});
+  }
+
+  public resetGameWithoutScores() {
+    this.socket.emit('newGame', {keepScores: false});
   }
 
   public startGame() {
     this.socket.emit('startGame');
+  }
+
+  public noMajority() {
+    this.socket.emit('moMajority');
+  }
+
+  public guessWord(wasCorrect: boolean) {
+    this.socket.emit('guessWord', {wasCorrect: wasCorrect});
   }
 
   public connect() {
