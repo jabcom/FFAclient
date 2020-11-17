@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, Query } from '@angular/core';
 import { Gesture, GestureController, IonButton, IonCard } from '@ionic/angular';
 import { ServerService } from '../server.service';
-
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-playing-game',
@@ -11,19 +11,47 @@ import { ServerService } from '../server.service';
 export class PlayingGamePage implements AfterViewInit {  
 
   @ViewChild(IonButton,{read: ElementRef}) card: ElementRef;
-
   
   longpressActive = false;
   constructor(
     private gestureCtrl: GestureController,
-    private server : ServerService) {    
+    private server : ServerService,
+    private alertController: AlertController) {    
    
   } 
   message: string = '?';
-  fakeartistMEssage = 'You are the fake artist'
-  
+  fakeartistMEssage = 'You are the fake artist';
   ngOnInit() {
+
   }
+
+testFun(){
+  console.log('worked');
+}
+
+  async showPrompt(nameOfPlayer:string) {
+    const prompt = await this.alertController.create({
+      header: 'Accuse '+ nameOfPlayer + ' of being the fake Artist ?', 
+      inputs:[],   
+      buttons: [
+        {
+          text: 'confirm',
+          handler: data => {
+            this.server.guessArtist(nameOfPlayer);
+            console.log('guessed nameOfPlayer');
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+      });
+      await prompt.present();
+    }
+
 
   useLongPress(cardEl){   
     const card = cardEl;
@@ -34,7 +62,7 @@ export class PlayingGamePage implements AfterViewInit {
         gestureName: 'long-press',
         threshold: 0,
         onStart: ev => {
-          console.log('press')
+          console.log('press');
           this.longpressActive = true;
           if(this.server.roomInfo.artist == this.server.roomInfo.playerName){
             this.message = 'The Title is ' + this.server.roomInfo.word;

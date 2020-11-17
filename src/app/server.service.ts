@@ -185,14 +185,17 @@ export class ServerService {
         //switch to adding words
         break;
       case 2:
-        this.router.navigate(['/playing-games'])
+        this.router.navigate(['/playing-game'])
         //switch to playing game
         break;
       case 3:
         //switch to artist guessed
+        this.router.navigate(['/guess-title'])
+
         break;
       case 4:
         //switch to word guessed
+        this.router.navigate(['/scorboard'])
         break;
     }
   }

@@ -11,8 +11,8 @@
   <ion-card>
     
       <ion-card-header  class="ion-text-center">
-    Take turns drawing. You can only draw a contious line. After everyone has drawn at least Once. 
-      Everyone vote who they think did not know the Title 
+    Take turns drawing. You can only draw a contious line. After everyone has drawn at least once, Everyone votes on who they think did not know the Title (the FAKE artist).
+    If there was a clear majority then the host will check on their device. If not, play another round.
     
   </ion-card-header>
 </ion-card>
@@ -41,14 +41,22 @@
 </ion-card>
 </ion-card>
 
-<ion-card color="secondary" >
+<ion-card  *ngIf="server.isHost" color="secondary" >
   <ion-card-header>
   <ion-card-title class="ion-text-center"> Guess who was the FAKE artist</ion-card-title>
   </ion-card-header>
+  <ion-card>
+  <ion-button fill="white"  expand="block" size="large"><ion-text color="secondary">
+    No majority
+    </ion-text>
+  
+  </ion-button>
+</ion-card>
+
   <ion-list *ngFor="let player of server.roomInfo.players"> 
-    <ion-item> 
+    <ion-item button (click)="showPrompt(player)"> 
       <ion-icon  slot="start" name ="person-outline"></ion-icon>
-      <ion-button>{{player.name}}</ion-button>     
+      {{player}}    
     </ion-item>
   </ion-list>
 </ion-card>

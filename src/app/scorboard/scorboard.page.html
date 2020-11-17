@@ -1,0 +1,41 @@
+<app-topbar></app-topbar>
+<ion-content>
+
+  <ion-card color="secondary" >
+    <ion-card-header>
+  <ion-card-title class="ion-text-center" > Round Over</ion-card-title>
+  <ion-card-title class="ion-text-center" >  {{scoremessage}} </ion-card-title>
+  
+  </ion-card-header>
+  <ion-card>
+    
+    <ion-card-header  class="ion-text-center">
+  The host can start another round or a new game  
+</ion-card-header>
+</ion-card>
+<ion-card >
+  <ion-button *ngIf="server.isHost" fill="clear" expand="block" size="large"><ion-text color="secondary">
+    New Round
+    </ion-text>
+  </ion-button>
+  <div></div>
+  <ion-button *ngIf="server.isHost" fill="clear"  expand="block" size="large"><ion-text color="secondary">
+    New Game
+    </ion-text>
+  </ion-button>
+  </ion-card>
+</ion-card>
+  <ion-card color="secondary" >
+    <ion-card-header>
+    <ion-card-title class="ion-text-center"> Scores</ion-card-title>
+    </ion-card-header>
+    <ion-list *ngFor="let player of server.roomInfo.players"> 
+      <ion-item> 
+        <ion-icon  slot="start" name ="person-outline"></ion-icon>
+        <ion-title>{{player.name}}</ion-title>
+        <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+        <ion-text slot="end">{{player.score}} points</ion-text>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  

@@ -1,0 +1,54 @@
+<app-topbar></app-topbar>
+<ion-content>
+
+  <ion-card color="secondary" >
+    <ion-card-header>
+  <ion-card-title class="ion-text-center" >{{server.roomInfo.artist}} was the Fake Artist!</ion-card-title>
+  
+  </ion-card-header>
+  <ion-card>
+    
+    <ion-card-header  class="ion-text-center">
+      {{server.roomInfo.artist}} has one final chance to earn points. Can they guess what the title is?
+  
+</ion-card-header>
+</ion-card>
+  </ion-card>
+
+<ion-card color="secondary" >
+  <ion-card-header>
+
+      <ion-title class="ion-text-center">
+        The category is {{server.roomInfo.category}}
+      </ion-title>
+ <ion-title class="ion-text-center">
+  The title is....
+</ion-title>
+     <ion-title class="ion-text-center">
+       {{message}}
+     </ion-title>
+  </ion-card-header>
+
+<ion-card>
+<ion-button fill="clear"  expand="block" size="large"><ion-text color="secondary">
+  Hold to Reveal
+  </ion-text>
+</ion-button>
+</ion-card>
+</ion-card>
+
+  <ion-card color="secondary" *ngIf="server.isHost" >
+    <ion-card-header>
+  <ion-card-title class="ion-text-center" > Did {{server.roomInfo.artist}} guess correctly?</ion-card-title>  
+  </ion-card-header>
+
+  <ion-card>
+  <ion-button *ngIf="server.isHost" fill="clear" expand="block" size="large"><ion-text color="secondary">
+    Yes
+    </ion-text>
+  </ion-button >
+  <div></div>
+  <ion-button *ngIf="server.isHost"  fill="clear"  expand="block" size="large"><ion-text color="secondary">
+    No
+    </ion-text>
+  </ion-button>

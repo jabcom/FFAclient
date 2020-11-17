@@ -22,6 +22,14 @@ const routes: Routes = [
     path: 'playing-game',
     loadChildren: () => import('./playing-game/playing-game.module').then( m => m.PlayingGamePageModule)
   },
+  {
+    path: 'guess-title',
+    loadChildren: () => import('./guess-title/guess-title.module').then( m => m.GuessTItlePageModule)
+  },
+  {
+    path: 'scorboard',
+    loadChildren: () => import('./scorboard/scorboard.module').then( m => m.ScorboardPageModule)
+  },
 
   
 
