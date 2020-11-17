@@ -20,9 +20,9 @@
   </ion-toolbar>
   <ion-spinner *ngIf="server.serverInfo.connected == false" name="circles">
   </ion-spinner>
-  <ion-icon *ngIf="server.serverInfo.connected == true" name="wifi">
+  <ion-icon (click)="showServerInfo($event)" *ngIf="server.serverInfo.connected == true" name="wifi">
   </ion-icon>
-  <ion-text *ngIf="server.serverInfo.connected == true">
+  <ion-text (click)="showServerInfo($event)" *ngIf="server.serverInfo.connected == true">
     {{ server.serverInfo.name }}
   </ion-text>
 </ion-item>

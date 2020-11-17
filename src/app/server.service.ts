@@ -112,6 +112,7 @@ export class ServerService {
       } else {
         this.isHost == false;
       }
+      this.serverInfo.url = this.url;
       console.log(this.serverInfo);
     });
 
