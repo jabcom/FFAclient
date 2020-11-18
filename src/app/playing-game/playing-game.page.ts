@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild, Query } from '@angular
 import { Gesture, GestureController, IonButton, IonCard } from '@ionic/angular';
 import { ServerService } from '../server.service';
 import { AlertController } from '@ionic/angular';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-playing-game',
@@ -20,24 +21,38 @@ export class PlayingGamePage implements AfterViewInit {
    
   } 
   message: string = '?';
+  lastguess: string = 'placeholder';
   fakeartistMEssage = 'You are the fake artist';
+  twoPLayersMEssage = ''
   ngOnInit() {
+   
+  
+  } 
+  
 
-  }
+  async showPrompt(nameOfPlayer:string) {    
+       
+    var i= 0;
+        this.server.roomInfo.players.forEach(player => {
+          if(player.guessed){
+            i+= 1;
+          }
+          if(i == 2){
+            this.twoPLayersMEssage = 'Only two players remain, no matter who you guess the round will end and the Fake artist can guess the title';
+          }
+        }) 
 
-testFun(){
-  console.log('worked');
-}
-
-  async showPrompt(nameOfPlayer:string) {
-    const prompt = await this.alertController.create({
+    const prompt = await this.alertController.create({  
+      
       header: 'Accuse '+ nameOfPlayer + ' of being the fake Artist ?', 
+      message:this.twoPLayersMEssage,
       inputs:[],   
       buttons: [
         {
           text: 'confirm',
           handler: data => {
             this.server.guessArtist(nameOfPlayer);
+            this.lastguess = nameOfPlayer;
             console.log('guessed nameOfPlayer');
           }
         },
