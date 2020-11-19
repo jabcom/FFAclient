@@ -63,7 +63,7 @@
 </ion-card>
 
   <ion-list *ngFor="let player of server.roomInfo.players"> 
-    <ion-item *ngIf="player.guessed == false" (click)="showPrompt(player.name)"> 
+    <ion-item button *ngIf="player.guessed == false" (click)="showPrompt(player.name)"> 
       <ion-icon  slot="start" name ="person-outline"></ion-icon>
       {{player.name}}    
     </ion-item>

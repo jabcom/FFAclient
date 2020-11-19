@@ -67,6 +67,7 @@ export class ServerService {
   }
 
   public changeName(name: string) {
+    console.log(name);
     this.socket.emit('changeName', {newName: name});
   }
 

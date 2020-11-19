@@ -3,15 +3,14 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { version } from 'process';
+
 
 import { MenuController } from '@ionic/angular';
 
 import { AlertController } from '@ionic/angular';
-import { PlayerInfoService} from './player-info.service';
+
 
 import { ServerService } from './server.service';
-import { Router } from '@angular/router';
 
 import { ToastController } from '@ionic/angular';
 
@@ -25,10 +24,8 @@ export class AppComponent { navigate: any; menu:MenuController;
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public alertController:AlertController,
-    private playerInfo: PlayerInfoService,
-    private server: ServerService,
-    private router: Router,
+    public alertController:AlertController,     private server: ServerService,
+
     private toastController: ToastController
   ) {
     this.initializeApp();
@@ -40,8 +37,8 @@ export class AppComponent { navigate: any; menu:MenuController;
     this.server.getServerInfo();
     this.emitSubscription = this.server.getWarningMessageEmitter().subscribe(item => this.showWarning(item));
     this.server.moveToRoom(this.server.roomInfo.state);
-
   }
+  
   ngOnDestroy() {
     this.emitSubscription.unsubscribe();
   }
@@ -63,16 +60,20 @@ export class AppComponent { navigate: any; menu:MenuController;
             console.log('Save clicked');
             this.playerName.replace(/ /g,'');
             if(this.playerName != null || this.playerName != ""){
-              this.playerInfo.changeName(this.playerName);
+              this.server.changeName(this.playerName);
             }
             console.log(this.playerName);
+            this.menu.close();
           }
         },
         {
+          
           text: 'Cancel',
-          handler: data => {
-            console.log('Cancel clicked');
+          handler: data => {            
+            this.menu.close();          
+            console.log('Cancel clicked');            
           }
+          
         }
       ]
       });

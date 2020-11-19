@@ -17,9 +17,9 @@
           <ion-icon name="person-outline" slot="start"></ion-icon>
             Kick Player
         </ion-item>
-        <ion-item [routerLink]="changeHost" routerDirection="forward">
+        <ion-item  button (click)="showPrompt()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
-            Change Host
+            Change Name
         </ion-item>
         <ion-item [routerLink]="editScores" routerDirection="forward">
           <ion-icon name="easel-outline" slot="start"></ion-icon>
