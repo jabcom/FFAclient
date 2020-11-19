@@ -8,6 +8,7 @@ import {Router } from '@angular/router';
 })
 export class ServerService {
   constructor( public router: Router) {
+    this.origRoomInfo = this.roomInfo;
     this.connect();
   };
 
@@ -41,6 +42,7 @@ export class ServerService {
     categorys: [],
     wordList: []
   }
+  origRoomInfo: any;
   public inRoom: boolean = false;
   public isHost: boolean = false;
   public playerName: string = "";
@@ -109,7 +111,12 @@ export class ServerService {
     this.socket.emit('guessWord', {wasCorrect: wasCorrect});
   }
   public leaveRoom() {
-    this.socket.emit();
+    this.socket.disconnect();
+    this.roomInfo = this.origRoomInfo;
+    this.connect();
+    this.isHost = false;
+    this.inRoom = false;
+    this.router.navigate(['/home']);
   }
 
   public connect() {
