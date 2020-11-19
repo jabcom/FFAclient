@@ -108,6 +108,9 @@ export class ServerService {
   public guessWord(wasCorrect: boolean) {
     this.socket.emit('guessWord', {wasCorrect: wasCorrect});
   }
+  public leaveRoom() {
+    this.socket.emit();
+  }
 
   public connect() {
     console.log("connecting")

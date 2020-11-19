@@ -61,7 +61,7 @@ export class AppComponent { navigate: any; menu:MenuController;
         {
           text: 'yes',
           handler: data => {            
-            
+            this.server.leaveRoom();
           }
         },
         {
