@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ServerService } from './server.service';
+import{KickModelPage } from'./kick-model/kick-model.page';
 
 import { fancyAnimation } from './animations';
 import { AppComponent } from './app.component';
@@ -13,8 +14,8 @@ import { ServerInfoComponent } from './popovers/server-info/server-info.componen
 
 
 @NgModule({
-  declarations: [AppComponent, ServerInfoComponent],
-  entryComponents: [ServerInfoComponent],
+  declarations: [AppComponent, KickModelPage, ServerInfoComponent],
+  entryComponents: [ServerInfoComponent, KickModelPage],
   imports: [BrowserModule, IonicModule.forRoot({animated:true}), AppRoutingModule],
   providers: [
     StatusBar,

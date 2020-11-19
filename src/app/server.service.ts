@@ -44,6 +44,7 @@ export class ServerService {
   public inRoom: boolean = false;
   public isHost: boolean = false;
   public playerName: string = "";
+  public modalPage:string = "";
 
   public getServerInfo() {
     this.socket.emit('serverInfo');
@@ -218,5 +219,9 @@ export class ServerService {
         break;
     }
   }
+
+setModalPage(page:string){
+  this.modalPage = page;
+}
 
 }

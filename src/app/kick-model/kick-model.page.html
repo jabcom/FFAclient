@@ -1,0 +1,93 @@
+
+
+
+
+
+
+<ion-card *ngIf="server.modalPage == 'kick'"  color="secondary" >
+  <ion-card-header>
+  <ion-card-title class="ion-text-center"> Kick Player </ion-card-title>
+  </ion-card-header> 
+  <ion-list *ngFor="let player of server.roomInfo.players"> 
+    <ion-item button (click)="kickPlayerPrompt(player.name)">
+      <ion-icon  slot="start" name ="person-outline"></ion-icon>
+      {{player.name}}    
+    </ion-item>    
+  </ion-list>  
+<ion-card fill="white">
+  <ion-button (click)="modalController.dismiss();" expand="block" fill="clear" shape="block">
+    Close
+  </ion-button>
+</ion-card>
+</ion-card>
+
+
+  <ion-card *ngIf="server.modalPage == 'scores'"  color="secondary" >
+    <ion-card-header>
+    <ion-card-title class="ion-text-center"> Scores</ion-card-title>
+    </ion-card-header>
+    <ion-list *ngFor="let player of server.roomInfo.players"> 
+      <ion-item> 
+        <ion-icon  slot="start" name ="person-outline"></ion-icon>
+        <ion-title>{{player.name}}</ion-title>
+        <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+        <ion-text slot="end">{{player.score}} points</ion-text>
+      </ion-item>
+    </ion-list>
+    <ion-card fill="white">
+      <ion-button (click)="modalController.dismiss();" expand="block" fill="clear" shape="block">
+        Close
+      </ion-button>
+    </ion-card>
+    </ion-card>
+
+  <ion-card *ngIf="server.modalPage =='changeHost'"  color="secondary" >
+    <ion-card-header>
+    <ion-card-title class="ion-text-center"> Change Host</ion-card-title>
+    </ion-card-header>
+    <ion-list *ngFor="let player of server.roomInfo.players"> 
+      <ion-item button (click)="changeHostPrompt(player.name)"> 
+        <ion-icon  slot="start" name ="person-outline"></ion-icon>
+        <ion-title>{{player.name}}</ion-title>
+        <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+        <ion-text slot="end">{{player.score}} points</ion-text>
+      </ion-item>
+    </ion-list>
+  <ion-card fill="white">
+  <ion-button (click)="modalController.dismiss();" expand="block" fill="clear" shape="block">
+    Close
+  </ion-button>
+</ion-card>
+</ion-card>
+
+  
+
+  <ion-card *ngIf="server.modalPage =='changeScore'"  color="secondary" >
+    <ion-card-header>
+    <ion-card-title class="ion-text-center"> Edit Scores</ion-card-title>
+    </ion-card-header>
+    <ion-list *ngFor="let player of server.roomInfo.players"> 
+      <ion-item> 
+        <ion-icon  slot="start" name ="person-outline"></ion-icon>
+        <ion-title>{{player.name}}</ion-title>
+        <ion-icon  slot="end" name ="easel-outline"></ion-icon>
+        <ion-text slot="end">{{player.score}} points</ion-text>
+        <ion-button (click)="server.changeScore(player.name,player.score+1)">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="player.score > 0" (click)="server.changeScore(player.name,player.score-1)">
+          <ion-icon slot="icon-only" name="remove"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="player.score < 1" disabled="true">
+          <ion-icon slot="icon-only" name="remove"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-card fill="white">
+      <ion-button (click)="modalController.dismiss();" expand="block" fill="clear" shape="block">
+        Close
+      </ion-button>
+    </ion-card>
+    </ion-card>
+
+ 

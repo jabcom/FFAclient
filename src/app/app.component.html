@@ -12,37 +12,33 @@
       </ion-item>
     </ion-header>
     <ion-content color="light">
-      <ion-list *ngIf="this.server.isHost == true">
-        <ion-item [routerLink]="kickPlayer" routerDirection="forward">
+      <ion-list>
+        <ion-item *ngIf="this.server.isHost == true" button (click)="server.setModalPage('kick');presentModal()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
             Kick Player
         </ion-item>
-        <ion-item  button (click)="showPrompt()">
+        <ion-item *ngIf="this.server.isHost == true" button (click)="changeNamePrompt()">
           <ion-icon name="person-outline" slot="start"></ion-icon>
             Change Name
         </ion-item>
-        <ion-item [routerLink]="editScores" routerDirection="forward">
+        <ion-item *ngIf="this.server.isHost == true" button (click)="server.setModalPage('changeScore');presentModal()" >
           <ion-icon name="easel-outline" slot="start"></ion-icon>
             Edit Scores
-        </ion-item>
-      </ion-list>
-
-      <ion-list *ngIf="this.server.inRoom">
-        <ion-item [routerLink]="scores" routerDirection="forward">
+        </ion-item>     
+   
+        <ion-item *ngIf="this.server.inRoom" button (click)="server.setModalPage('scores');presentModal()">
           <ion-icon name="easel-outline" slot="start"></ion-icon>
             Scores
         </ion-item>
-        <ion-item [routerLink]="rules" routerDirection="forward">
+        <ion-item *ngIf="this.server.inRoom" button (click)="server.setModalPage('changeHost');presentModal()">
           <ion-icon name="school-outline" slot="start"></ion-icon>
-            Rules
+            Change Host
         </ion-item>
-        <ion-item routerLink="leaveRoom" routerDirection="forward">
+        <ion-item *ngIf="this.server.inRoom" button (click)="leaveRoomPrompt()">
           <ion-icon name="exit-outline" slot="start"></ion-icon>
             Leave Room
         </ion-item>
-      </ion-list>
 
-      <ion-list>
         <ion-item [routerLink]="exit" routerDirection="forward">
           <ion-icon name="close-circle-outline" slot="start"></ion-icon>
             Exit

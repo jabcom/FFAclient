@@ -9,6 +9,9 @@ import { MenuController } from '@ionic/angular';
 
 import { AlertController } from '@ionic/angular';
 
+import { ModalController } from '@ionic/angular';
+
+import { KickModelPage } from './kick-model/kick-model.page';
 
 import { ServerService } from './server.service';
 
@@ -24,7 +27,9 @@ export class AppComponent { navigate: any; menu:MenuController;
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public alertController:AlertController,     private server: ServerService,
+    public alertController:AlertController, 
+    private server: ServerService,
+    public modalController: ModalController,
 
     private toastController: ToastController
   ) {
@@ -39,10 +44,44 @@ export class AppComponent { navigate: any; menu:MenuController;
     this.server.moveToRoom(this.server.roomInfo.state);
   }
   
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: KickModelPage,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  
+  async leaveRoomPrompt() {
+    const prompt = await this.alertController.create({
+      header: 'Leave Room?',    
+      buttons: [
+        {
+          text: 'yes',
+          handler: data => {            
+            
+          }
+        },
+        {
+          
+          text: 'Cancel',
+          handler: data => { 
+            console.log('Cancel clicked');            
+          }
+          
+        }
+      ]
+      });
+      await prompt.present();
+    }
+
+
   ngOnDestroy() {
     this.emitSubscription.unsubscribe();
   }
-  async showPrompt() {
+  async changeNamePrompt() {
     const prompt = await this.alertController.create({
       header: 'Change Name',
       inputs: [
@@ -69,8 +108,7 @@ export class AppComponent { navigate: any; menu:MenuController;
         {
           
           text: 'Cancel',
-          handler: data => {            
-            this.menu.close();          
+          handler: data => { 
             console.log('Cancel clicked');            
           }
           
@@ -79,6 +117,7 @@ export class AppComponent { navigate: any; menu:MenuController;
       });
       await prompt.present();
     }
+
 
     async showWarning(text: string) {
       const toast = await this.toastController.create({
