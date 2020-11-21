@@ -16,7 +16,7 @@ import { TopbarComponent } from '../components/topbar/topbar.component';
     IonicModule,
     ScorboardPageRoutingModule
   ],
-  entryComponents: [TopbarComponent],
-  declarations: [ScorboardPage, TopbarComponent]
+  entryComponents: [],
+  declarations: [ScorboardPage]
 })
 export class ScorboardPageModule {}

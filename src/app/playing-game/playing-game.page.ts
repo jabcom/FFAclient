@@ -9,29 +9,29 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
   templateUrl: './playing-game.page.html',
   styleUrls: ['./playing-game.page.scss'],
 })
-export class PlayingGamePage implements AfterViewInit {  
+export class PlayingGamePage implements AfterViewInit {
 
   @ViewChild(IonButton,{read: ElementRef}) card: ElementRef;
-  
+
   longpressActive = false;
   constructor(
-    private gestureCtrl: GestureController,
-    private server : ServerService,
-    private alertController: AlertController) {    
-   
-  } 
+    public gestureCtrl: GestureController,
+    public server : ServerService,
+    public alertController: AlertController) {
+
+  }
   message: string = '?';
   lastguess: string = 'placeholder';
   fakeartistMEssage = 'You are the fake artist';
   twoPLayersMEssage = ''
   ngOnInit() {
-   
-  
-  } 
-  
 
-  async showPrompt(nameOfPlayer:string) {    
-       
+
+  }
+
+
+  async showPrompt(nameOfPlayer:string) {
+
     var i= 0;
         this.server.roomInfo.players.forEach(player => {
           if(player.guessed){
@@ -40,13 +40,13 @@ export class PlayingGamePage implements AfterViewInit {
           if(i == 2){
             this.twoPLayersMEssage = 'Only two players remain, no matter who you guess the round will end and the Fake artist can guess the title';
           }
-        }) 
+        })
 
-    const prompt = await this.alertController.create({  
-      
-      header: 'Accuse '+ nameOfPlayer + ' of being the fake Artist ?', 
+    const prompt = await this.alertController.create({
+
+      header: 'Accuse '+ nameOfPlayer + ' of being the fake Artist ?',
       message:this.twoPLayersMEssage,
-      inputs:[],   
+      inputs:[],
       buttons: [
         {
           text: 'confirm',
@@ -68,12 +68,12 @@ export class PlayingGamePage implements AfterViewInit {
     }
 
 
-  useLongPress(cardEl){   
+  useLongPress(cardEl){
     const card = cardEl;
       console.log('utton:',cardEl);
 
       const gesture: Gesture = this.gestureCtrl.create({
-        el: card.nativeElement,       
+        el: card.nativeElement,
         gestureName: 'long-press',
         threshold: 0,
         onStart: ev => {
@@ -85,7 +85,7 @@ export class PlayingGamePage implements AfterViewInit {
           else{
             this.message = this.fakeartistMEssage;
           }
-         
+
         },
         onEnd: ev => {
           console.log('notpress')

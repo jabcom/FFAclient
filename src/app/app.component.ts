@@ -17,6 +17,8 @@ import { ServerService } from './server.service';
 
 import { ToastController } from '@ionic/angular';
 
+import { TopbarComponent } from './components/topbar/topbar.component';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

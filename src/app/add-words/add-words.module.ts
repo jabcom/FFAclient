@@ -15,7 +15,7 @@ import { AddWordsPage } from './add-words.page';
     IonicModule,
     AddWordsPageRoutingModule
   ],
-  entryComponents: [TopbarComponent],
-  declarations: [AddWordsPage,TopbarComponent]
+  entryComponents: [],
+  declarations: [AddWordsPage]
 })
 export class AddWordsPageModule {}

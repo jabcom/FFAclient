@@ -1,16 +1,15 @@
-<app-topbar></app-topbar>
 <ion-content>
 
   <ion-card color="secondary" >
     <ion-card-header>
   <ion-card-title class="ion-text-center" >{{server.roomInfo.artist}} was the Fake Artist!</ion-card-title>
-  
+
   </ion-card-header>
   <ion-card>
-    
+
     <ion-card-header  class="ion-text-center">
       {{server.roomInfo.artist}} has one final chance to earn points. Can they guess what the title is?
-  
+
 </ion-card-header>
 </ion-card>
   </ion-card>
@@ -39,7 +38,7 @@
 
   <ion-card color="secondary" *ngIf="server.isHost" >
     <ion-card-header>
-  <ion-card-title class="ion-text-center" > Did {{server.roomInfo.artist}} guess correctly?</ion-card-title>  
+  <ion-card-title class="ion-text-center" > Did {{server.roomInfo.artist}} guess correctly?</ion-card-title>
   </ion-card-header>
 
   <ion-card>

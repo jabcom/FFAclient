@@ -16,7 +16,7 @@ import { TopbarComponent } from '../components/topbar/topbar.component';
     IonicModule,
     PlayingGamePageRoutingModule
   ],
-  entryComponents: [TopbarComponent],
-  declarations: [PlayingGamePage,TopbarComponent]
+  entryComponents: [],
+  declarations: [PlayingGamePage]
 })
 export class PlayingGamePageModule {}

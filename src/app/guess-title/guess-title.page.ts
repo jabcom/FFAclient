@@ -10,38 +10,38 @@ import { ServerService } from '../server.service';
 })
 export class GuessTItlePage implements AfterViewInit {
 
-  constructor(private server: ServerService,
-    private gestureCtrl: GestureController) { }
+  constructor(public server: ServerService,
+    public gestureCtrl: GestureController) { }
 
   message: string = '?';
   fakeartistMEssage = 'You are the fake artist';
 
-  
+
   @ViewChild(IonButton,{read: ElementRef}) card: ElementRef;
 
 
   ngOnInit() {
   }
-  useLongPress(cardEl){   
+  useLongPress(cardEl){
     const card = cardEl;
       console.log('utton:',cardEl);
 
       const gesture: Gesture = this.gestureCtrl.create({
-        el: card.nativeElement,       
+        el: card.nativeElement,
         gestureName: 'long-press',
         threshold: 0,
         onStart: ev => {
-          console.log('press');         
+          console.log('press');
           if(this.server.roomInfo.artist != this.server.roomInfo.playerName){
             this.message = 'The Title is ' + this.server.roomInfo.word;
           }
           else{
             this.message = this.fakeartistMEssage;
           }
-         
+
         },
         onEnd: ev => {
-          console.log('notpress')      
+          console.log('notpress')
           this.message = '?';
         },
       },true);

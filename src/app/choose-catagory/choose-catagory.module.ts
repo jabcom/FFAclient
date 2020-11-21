@@ -14,9 +14,9 @@ import { TopbarComponent } from '../components/topbar/topbar.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    ChooseCatagoryPageRoutingModule,    
+    ChooseCatagoryPageRoutingModule,
   ],
-  entryComponents: [TopbarComponent],
-  declarations: [ChooseCatagoryPage,TopbarComponent]
+  entryComponents: [],
+  declarations: [ChooseCatagoryPage]
 })
 export class ChooseCatagoryPageModule {}

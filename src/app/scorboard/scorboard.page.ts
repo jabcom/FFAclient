@@ -8,7 +8,7 @@ import { ServerService } from '../server.service';
 })
 export class ScorboardPage implements OnInit {
 
-  constructor( private server: ServerService) { }
+  constructor( public server: ServerService) { }
 
   scorenumbers:number[] = [1]
   topScore:number;
@@ -21,7 +21,7 @@ export class ScorboardPage implements OnInit {
       this.scorenumbers.push(player.score);
     });
 
-   this.topScore = Math.max.apply(null,this.scorenumbers);     
+   this.topScore = Math.max.apply(null,this.scorenumbers);
 
 console.log(this.topScore);
 
@@ -44,7 +44,7 @@ console.log(this.topScore);
     }
     )
   */}
- 
+
     if(this.topPLayers.length > 1 ){
       this.topPLayers.forEach(player => {
         this.scoremessage += player.name +", ";
@@ -54,11 +54,11 @@ console.log(this.topScore);
     else{
       this.scoremessage +=  this.topPLayers[0].name + ' is winning with ' + this.topScore + ' points';
     }
-    
+
 
   }
 
-  
+
 
 
 }

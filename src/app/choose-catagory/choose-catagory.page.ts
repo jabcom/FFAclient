@@ -10,55 +10,55 @@ import { ServerService } from '../server.service';
 })
 export class ChooseCatagoryPage {
 
-  constructor( private server : ServerService,)  {     
+  constructor( public server : ServerService,)  {
   }
 
-  
-  catInput:string;  
+
+  catInput:string;
   catInputNoSpaces:string;
-  currentCatagory:string = '...'; 
+  currentCatagory:string = '...';
   setCatagory:boolean;
 
   /*
   onGetValue(event) {
     //this.catInput = (<HTMLInputElement>event.target).value;
     this.catInputNoSpaces =this.catInput.replace(/ /g,'');
-    if(this.catInputNoSpaces!= null && this.catInputNoSpaces!=""){ 
+    if(this.catInputNoSpaces!= null && this.catInputNoSpaces!=""){
       this.currentCatagory = this.catInput.trim();
-      this.server.setCategory(this.currentCatagory); 
+      this.server.setCategory(this.currentCatagory);
       console.log(this.currentCatagory);
     }
     else{
       this.currentCatagory = '...';
-    }  
+    }
   }
   */
- 
+
  onGetValue() {
   this.catInput = (<HTMLInputElement>event.target).value;
   this.catInputNoSpaces =this.catInput.replace(/ /g,'');
-  if(this.catInputNoSpaces!= null && this.catInputNoSpaces!=""){ 
-    this.currentCatagory = this.catInput.trim();    
-    this.server.setCategory(this.currentCatagory); 
+  if(this.catInputNoSpaces!= null && this.catInputNoSpaces!=""){
+    this.currentCatagory = this.catInput.trim();
+    this.server.setCategory(this.currentCatagory);
     this.setCatagory = true;
     console.log(this.currentCatagory);
   }
   else{
     this.currentCatagory = '...';
     this.setCatagory = true;
-    this.server.setCategory(this.currentCatagory); 
-  }  
+    this.server.setCategory(this.currentCatagory);
+  }
 }
   getRandomCatagory(){
     this.currentCatagory = this.server.roomInfo.categorys[Math.floor
-      (Math.random()*this.server.roomInfo.categorys.length)]; 
+      (Math.random()*this.server.roomInfo.categorys.length)];
       this.setCatagory = true;
-      this.server.setCategory(this.currentCatagory);    
+      this.server.setCategory(this.currentCatagory);
       this.catInput = " ";
   }
 
   startGame(){
-    this.server.startGame(); 
+    this.server.startGame();
   }
 
 }

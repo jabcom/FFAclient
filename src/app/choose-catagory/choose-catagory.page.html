@@ -1,5 +1,3 @@
-<app-topbar></app-topbar>
-
 <ion-content>
 
 <ion-card color="secondary" >
@@ -13,16 +11,16 @@
   <ion-card-header>
 <ion-card-title  *ngIf="server.isHost" class="ion-text-center">The current catagory is</ion-card-title>
 
-<ion-card-title *ngIf="server.isHost" class="ion-text-center"><ion-text color="primary">{{currentCatagory}}</ion-text> </ion-card-title> 
-<ion-card-title *ngIf="server.isHost == false" class="ion-text-center"><ion-text color="primary">{{server.roomInfo.category}}</ion-text> </ion-card-title> 
-<ion-card-title *ngIf="server.isHost == false && setCatagory == false" class="ion-text-center"><ion-text color="primary">...</ion-text> </ion-card-title> 
-  
+<ion-card-title *ngIf="server.isHost" class="ion-text-center"><ion-text color="primary">{{currentCatagory}}</ion-text> </ion-card-title>
+<ion-card-title *ngIf="server.isHost == false" class="ion-text-center"><ion-text color="primary">{{server.roomInfo.category}}</ion-text> </ion-card-title>
+<ion-card-title *ngIf="server.isHost == false && setCatagory == false" class="ion-text-center"><ion-text color="primary">...</ion-text> </ion-card-title>
+
 </ion-card-header>
 
   <ion-item *ngIf="server.isHost" expand="fill">
     <ion-icon  slot="start" name ="person-outline"></ion-icon>
     <ion-label position="floating">type your own</ion-label>
-    <ion-input  type="text" maxlength="20" [(ngModel)]="catInput" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>   
+    <ion-input  type="text" maxlength="20" [(ngModel)]="catInput" #curentInput clearInput = "true" (input)="onGetValue($event)"></ion-input>
   </ion-item>
 
 
@@ -37,8 +35,8 @@
   <ion-card-header>
   <ion-card-title class="ion-text-center"> {{server.roomInfo.players.length}} players connected</ion-card-title>
   </ion-card-header>
-  <ion-list *ngFor="let player of server.roomInfo.players"> 
-    <ion-item> 
+  <ion-list *ngFor="let player of server.roomInfo.players">
+    <ion-item>
       <ion-icon  slot="start" name ="person-outline"></ion-icon>
       <ion-title>{{player.name}}</ion-title>
       <ion-icon  slot="end" name ="easel-outline"></ion-icon>
@@ -46,5 +44,3 @@
     </ion-item>
   </ion-list>
 </ion-card>
-
-

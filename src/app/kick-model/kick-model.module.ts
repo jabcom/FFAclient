@@ -15,6 +15,6 @@ import { KickModelPage } from './kick-model.page';
     IonicModule,
     KickModelPageRoutingModule
   ],
-  declarations: [KickModelPage]
+  declarations: [KickModelPage, KickModelPage]
 })
 export class KickModelPageModule {}
