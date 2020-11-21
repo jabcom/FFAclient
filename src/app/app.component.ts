@@ -24,10 +24,10 @@ import { ToastController } from '@ionic/angular';
 })
 export class AppComponent { navigate: any; menu:MenuController;
   constructor(
-    private platform: Platform,
+    public platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public alertController:AlertController, 
+    public alertController:AlertController,
     private server: ServerService,
     public modalController: ModalController,
 
@@ -43,7 +43,7 @@ export class AppComponent { navigate: any; menu:MenuController;
     this.emitSubscription = this.server.getWarningMessageEmitter().subscribe(item => this.showWarning(item));
     this.server.moveToRoom(this.server.roomInfo.state);
   }
-  
+
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -53,24 +53,24 @@ export class AppComponent { navigate: any; menu:MenuController;
     return await modal.present();
   }
 
-  
+
   async leaveRoomPrompt() {
     const prompt = await this.alertController.create({
-      header: 'Leave Room?',    
+      header: 'Leave Room?',
       buttons: [
         {
           text: 'yes',
-          handler: data => {            
+          handler: data => {
             this.server.leaveRoom();
           }
         },
         {
-          
+
           text: 'Cancel',
-          handler: data => { 
-            console.log('Cancel clicked');            
+          handler: data => {
+            console.log('Cancel clicked');
           }
-          
+
         }
       ]
       });
@@ -102,16 +102,16 @@ export class AppComponent { navigate: any; menu:MenuController;
               this.server.changeName(this.playerName);
             }
             console.log(this.playerName);
-            this.menu.close();
+            //this.menu.close();
           }
         },
         {
-          
+
           text: 'Cancel',
-          handler: data => { 
-            console.log('Cancel clicked');            
+          handler: data => {
+            console.log('Cancel clicked');
           }
-          
+
         }
       ]
       });

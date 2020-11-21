@@ -133,9 +133,9 @@ export class ServerService {
         this.serverInfo.connected = false;
       }
       if (this.serverInfo.host == this.playerName) {
-        this.isHost == true;
+        this.isHost = true;
       } else {
-        this.isHost == false;
+        this.isHost = false;
       }
       this.serverInfo.url = this.url;
       console.log(this.serverInfo);
